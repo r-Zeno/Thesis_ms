@@ -1,0 +1,29 @@
+\usepackage[top=3.5cm, left=3cm, right=3cm, bottom=2.5cm, headheight=14pt]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+% to use the erewhon math font (sets both text and math fonts)
+\usepackage{fourier-otf}
+\usepackage{ifthen}
+\usepackage{hyperref}
+\usepackage{titling}
+\usepackage{multicol}
+\usepackage{lipsum}
+\usepackage[backend={biber},style=apa]{biblatex}
+
+\addbibresource{}
+
+\graphicspath{{graphics/}}
+
+\hypersetup{
+    pdfauthor = {Zeno Rossi},
+    pdftitle = {Neural Mass and Spiking Models for the Study of Neural Circuits}
+}
+
+\newcommand{\academicyear}{
+    \ifthenelse{\month<1}
+    {\the\numexpr\year-1\relax/\the\year}
+    {\the\numexpr\year-1\relax/\the\year}
+}
+
