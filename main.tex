@@ -1,4 +1,4 @@
-\documentclass[a4paper,openright,twoside,10pt]{report}
+\documentclass[a4paper,openright,twoside,11pt]{report}
 
 \input{sections/setup.tex}
 
@@ -7,7 +7,7 @@
 \date{}
 
 % what to compile
-%\includeonly{sections/cover}
+%\includeonly{sections/1-introduction.tex}
 
 \begin{document}
     \pagenumbering{roman}
@@ -17,6 +17,9 @@
 
     \pagenumbering{arabic}
     \cleardoublepage
-    \include{sections/3-introduction}
+    \include{sections/1-introduction.tex}
+
+    %\pagebreak
+    %\printbibliography
 
 \end{document}
