@@ -9,4 +9,14 @@ Sources of noise in neurons are many and not all variability in response is due 
 Still, due to the physical scale of cells, a stochastic component in neuronal function is inevitable by thermal noise alone. % cite something
 It is then to be expected that neural systems would have evolved to tolerate or, more daringly, exploit the presence of noise. 
 
-The idea of positive effects of noise on the dynamics of a system first appeared in the work of \textcite{benziMechanismStochasticResonance1981,benziStochasticResonanceClimatic1982}, where the term Stochastic Resonance (SR) was first used to describe the 
+The idea of studying the effects of noise on the dynamics of a system first appeared in the work of \textcite{benziMechanismStochasticResonance1981,benziStochasticResonanceClimatic1982}, where the term Stochastic Resonance (SR) was first used to describe the observed peak in the power spectrum of the solution of the stochastic differential equation in the form
+
+\begin{equation}
+    \odv{x}{t} = x\left(a-x^2\right) + A\cos(\Omega t) + \varepsilon\xi(t)
+\end{equation}
+
+where $\xi$ is gaussian white noise, for a value of the noise scaling $\varepsilon \in \left( \varepsilon_1, \varepsilon_2 \right)$.
+% just placeholder to understand the trajectory to be followed
+Then, in a "sensing system" sense, the (relatively) weak $\xi$ helped to recover the weak forcing frequency $\Omega$, which would have not been detected otherwise. 
+In this sense noise may be seen as beneficial in signal processing, neurons of the first part of the sensory systems are particularly noisy signal processors.
+
