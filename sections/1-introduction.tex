@@ -1,7 +1,7 @@
 \chapter{Stochastic Resonance in a Spiking Neural Network Model of the Honeybee Antennal Lobe}
 \section{Introduction}
 
-One of the first well estalblished findings in neuroscience with the advent of electrical recordings of neuronal activity, was the variability of neurons' responses. 
+One of the first well established findings in neuroscience with the advent of electrical recordings of neuronal activity, was the variability of neurons' responses. 
 That is, when stimulated with the same input, neurons respond with different temporal patterns of spikes, while the overall firing rate remains roughly equal \cite{tomkoNeuronalVariabilityNonstationary1974,mainenReliabilitySpikeTiming1995,tolhurstStatisticalReliabilitySignals1983}.
 
 This trial-to-trial variability is commonly called noise. 
@@ -9,14 +9,48 @@ Sources of noise in neurons are many and not all variability in response is due 
 Still, due to the physical scale of cells, a stochastic component in neuronal function is inevitable by thermal noise alone. % cite something
 It is then to be expected that neural systems would have evolved to tolerate or, more daringly, exploit the presence of noise. 
 
-The idea of studying the effects of noise on the dynamics of a system first appeared in the work of \textcite{benziMechanismStochasticResonance1981,benziStochasticResonanceClimatic1982}, where the term Stochastic Resonance (SR) was first used to describe the observed peak in the power spectrum of the solution of the stochastic differential equation in the form
+\subsection{Classical Stochastic Resonance}
+The idea of studying the effects of noise on the dynamics of a system first appeared in the work of \textcite{benziMechanismStochasticResonance1981,benziStochasticResonanceClimatic1982}, where the term Stochastic Resonance (SR) was used to explain the periodic behavior of earth's average temperature. 
+A brief covering of that first SR application will be made, as it provides an intuitive understanding of the general phenomenon and a surprising link to neural systems.
+
+The most common way to model temperature averages was using simple energy balance deterministic models:
 
 \begin{equation}
-    \odv{x}{t} = x\left(a-x^2\right) + A\cos(\Omega t) + \varepsilon\xi(t)
+    \label{eq:temp model}
+    C\odv{T}{t} = R_{in}(T) - R_{out}(T)
 \end{equation}
 
-where $\xi$ is gaussian white noise, for a value of the noise scaling $\varepsilon \in \left( \varepsilon_1, \varepsilon_2 \right)$.
+where $C$ is the earth's thermal capacity, and $R_{in}$ and $R_{out}$ represent the total incoming and outgoing solar radiation, defined as
+
+\begin{align}
+    &R_{in} = Q\mu(t) \\
+    &R_{out} = \alpha(T)Q\mu + \varepsilon(T)
+\end{align}
+
+note that $\mu(t)$ introduces a time dependence, defined as
+
+\begin{equation}
+    \mu(t) = 1 + \gamma \cos(\omega t)
+\end{equation}
+
+where $\gamma$ is a small constant, $\gamma \ll 1$. Here $\mu$ is the average incoming solar radiation oscillating due to varying orbital distances, but may represent any weak periodic forcing on the system.
+
+In \cite{benziStochasticResonanceClimatic1982} a simplification is used: 3 steady-states are assumed to exist as $T_1 < T_2 < T_3$, with $T_1\text{, } T_3$ being stable states. 
+\ref{eq:temp model} then becomes
+
+\begin{equation}
+    C\odv{T}{t} = \frac{\mu(t)\varepsilon(T)}{1 + \beta \left( 1 - T/T_1 \right) \left( 1 - T/T_2 \right) \left( 1 - T/T_3 \right)} -\varepsilon (T)
+\end{equation}
+%should be explained better
+
+
+
+A stable steady-state is a state to which the system is attracted to, and will converge over time, in our context, it is an "observable" climate on earth. 
+Instead an unstable state is repelling, and thus would be at a transition point between the 2 climates.
+
+
+
 % just placeholder to understand the trajectory to be followed
-Then, in a "sensing system" sense, the (relatively) weak $\xi$ helped to recover the weak forcing frequency $\Omega$, which would have not been detected otherwise. 
-In this sense noise may be seen as beneficial in signal processing, neurons of the first part of the sensory systems are particularly noisy signal processors.
+% Then, in a "sensing system" sense, the (relatively) weak $\xi$ helped to recover the weak forcing frequency $\Omega$, which would have not been detected otherwise. 
+% In this sense noise may be seen as beneficial in signal processing, neurons of the first part of the sensory systems are particularly noisy signal processors.
 
