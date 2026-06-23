@@ -11,7 +11,7 @@ It is then to be expected that neural systems would have evolved to tolerate or,
 
 \subsection{Classical Stochastic Resonance}
 The idea of studying the effects of noise on the dynamics of a system first appeared in the work of \textcite{benziMechanismStochasticResonance1981,benziStochasticResonanceClimatic1982}, where the term Stochastic Resonance (SR) was used to explain the periodic behavior of earth's average temperature. 
-A brief covering of that first SR application will be made, as it provides an intuitive understanding of the general phenomenon and a surprising link to neural systems.
+A brief covering of that first SR application will be made, as it provides a practical understanding of the general phenomenon and a surprising link to neural systems.
 
 The most common way to model temperature averages was using simple energy balance deterministic models:
 
@@ -23,34 +23,73 @@ The most common way to model temperature averages was using simple energy balanc
 where $C$ is the earth's thermal capacity, and $R_{in}$ and $R_{out}$ represent the total incoming and outgoing solar radiation, defined as
 
 \begin{align}
-    &R_{in} = Q\mu(t) \\
+    &R_{in} = Q\mu \\
     &R_{out} = \alpha(T)Q\mu + \varepsilon(T)
 \end{align}
 
-note that $\mu(t)$ introduces a time dependence, defined as
+where $\mu$ is the average incoming solar radiation.
+
+In \cite{benziStochasticResonanceClimatic1982} a simplification is used: 3 steady-states are assumed to exist as $T_1 < T_2 < T_3$, those are possible earth's climates.
+\ref{eq:temp model} then becomes
+
+\begin{equation}
+    C\odv{T}{t} = \frac{\mu\varepsilon(T)}{1 + \beta \left( 1 - T/T_1 \right) \left( 1 - T/T_2 \right) \left( 1 - T/T_3 \right)} -\varepsilon (T)
+\end{equation}
+%should be explained better
+
+To analyze the stability of the defined climates the rate of change of temperatures is taken as
+
+\begin{equation}
+    F(T) = \odv{T}{t} \text{ , }
+\end{equation}
+then a pseudo-potential energy function is defined as
+
+\begin{equation}
+    \Phi(T) = - \int F(T) \mathrm{d}T
+\end{equation}
+
+that represents the "energy" needed to change the temperature across temperature values. % this should be explained more clearly
+From $\Phi$ we get
+
+\begin{equation}
+    F(T) = - \pdv{\Phi}{T}
+\end{equation}
+
+Then intuitively the maximum of $\Phi$ will be an unstable point, while the minima will be stable. That is, where the second derivative with respect to temperature
+
+\begin{equation}
+    \odv{F}{T} = - \pdv[2]{\Phi}{T}
+\end{equation}
+
+is $<0$, any neighboring starting state of the earth's temperature will converge to it, while when it is $>0$ it will diverge.
+
+It can be shown that $T_1 \text{, } T_3$ are stable points, while $T_2$ is unstable: a peak any starting state would ''roll off'' from (see fig). % add an appendix showing that?
+In our context, $T_1 \text{, } T_3$ are the only observable climates, temperatures at which the earth will stay for enough time to be detectable in the geological records.
+This type of system where 2 stable states exist is called a bistable system, and the plot of $\Phi$ over $T$ displays the typical double well shape of the (pseudo)potential function. % add plot
+
+With the present model, we can see that the earth's climate would depend solely (all else being equal) on the starting temperature, i.e., wether it is smaller or greater than $T_2$.
+Then it would follow $F(T)$ towards $T_1$ or $T_3$. However, earth's temperatures do indeed show oscillations with a period of $10^5$ years.
+
+A weak cosinusoidal forcing modulating the input solar radiations can be introduced, representing the varying distance of the earth from the sun along its elliptic orbit. 
+Then $\mu$ becomes time dependent
 
 \begin{equation}
     \mu(t) = 1 + \gamma \cos(\omega t)
 \end{equation}
+where $\gamma \ll 1$ and $\omega = 2\pi/10^5$, reflecting the observed oscillation period.
+The derivative and pseudo-energy function become $\tilde{F} = \tilde{F}(T;t) \text{, } \tilde{\Phi} = \tilde{\Phi}(T;t)$.
 
-where $\gamma$ is a small constant, $\gamma \ll 1$. Here $\mu$ is the average incoming solar radiation oscillating due to varying orbital distances, but may represent any weak periodic forcing on the system.
+Still, this periodicity alone does not lead to any change in climates: the system never jumps over $T_2$ (see fig). % add phase plane
 
-In \cite{benziStochasticResonanceClimatic1982} a simplification is used: 3 steady-states are assumed to exist as $T_1 < T_2 < T_3$, with $T_1\text{, } T_3$ being stable states. 
-\ref{eq:temp model} then becomes
+Here the turning point, if gaussian white noise, representing various mechanisms causing $T$ fluctuations at a smaller time scale, is added to the system, yielding
 
 \begin{equation}
-    C\odv{T}{t} = \frac{\mu(t)\varepsilon(T)}{1 + \beta \left( 1 - T/T_1 \right) \left( 1 - T/T_2 \right) \left( 1 - T/T_3 \right)} -\varepsilon (T)
+    \odv{T}{t} = F(T) + \sigma \eta(t)
 \end{equation}
-%should be explained better
-
-
-
-A stable steady-state is a state to which the system is attracted to, and will converge over time, in our context, it is an "observable" climate on earth. 
-Instead an unstable state is repelling, and thus would be at a transition point between the 2 climates.
-
+then for certain values of $\sigma$ a jump between stable states will become possible, with a frequency $\approx 2\pi/10^5$.
 
 
 % just placeholder to understand the trajectory to be followed
-% Then, in a "sensing system" sense, the (relatively) weak $\xi$ helped to recover the weak forcing frequency $\Omega$, which would have not been detected otherwise. 
+% Then, in a "sensing system" sense, the (relatively) weak $\xi$ helped to recover the weak forcing frequency $\omega$, which would have not been detected otherwise. 
 % In this sense noise may be seen as beneficial in signal processing, neurons of the first part of the sensory systems are particularly noisy signal processors.
 
