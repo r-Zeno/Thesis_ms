@@ -18,7 +18,7 @@ gamma = 0.0005
 mu = 1
 period = 10e5
 omega = 2*np.pi/period
-sigma = np.sqrt(0.14)
+sigma = np.sqrt(0.15)
 
 ############## beta comp, from eq. 8 in Berti et al. (1982)
 r = eps/C*31557000 # seconds in a year
@@ -90,7 +90,7 @@ mid, amp = 0.5*(T1+T3), 0.5*(T3-T1)
 ax3.plot(t_span, noisy_sol[:, 0], lw=0.5, color='grey', label="T(t)")
 ax3.plot(t_span, mid + amp*np.cos(omega*t_span),
          color='black', alpha=0.6, label="forcing oscillation")
-#ax3.set_aspect(1)
+ax3.set_box_aspect(0.5)
 fig3.savefig(os.path.join(save_dir, "noise_timecourse.pdf"), bbox_inches="tight")
 
 plt.show()

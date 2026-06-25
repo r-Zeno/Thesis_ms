@@ -10,7 +10,7 @@ Still, due to the physical scale of cells, a stochastic component in neuronal fu
 It is then to be expected that neural systems would have evolved to tolerate or, more daringly, exploit the presence of noise. 
 
 \subsection{Classical Stochastic Resonance}
-The idea of studying the effects of noise on the dynamics of a system first appeared in the work of \textcite{benziMechanismStochasticResonance1981,benziStochasticResonanceClimatic1982}, where the term Stochastic Resonance (SR) was used to explain the periodic behavior of earth's average temperature. 
+The idea of studying the effects of noise on the dynamics of a system first appeared parallely in the work of \textcite{benziMechanismStochasticResonance1981,benziStochasticResonanceClimatic1982} and \textcite{nicolisStochasticAspectsClimatic1982}, where the term Stochastic Resonance (SR) was used to explain the periodic behavior of earth's average temperature. 
 A brief covering of that first SR application will be made, as it provides a practical understanding of the general phenomenon and a surprising link to neural systems.
 
 The most common way to model temperature averages was using simple energy balance deterministic models:
@@ -77,18 +77,27 @@ Then $\mu$ becomes time dependent
     \mu(t) = 1 + \gamma \cos(\omega t)
 \end{equation}
 where $\gamma \ll 1$ and $\omega = 2\pi/10^5$, reflecting the observed oscillation period.
-The derivative and pseudo-energy function become $\tilde{F} = \tilde{F}(T;t) \text{, } \tilde{\Phi} = \tilde{\Phi}(T;t)$.
+The derivative and pseudo-energy function become time dependent $\tilde{F} = \tilde{F}(T;t) \text{, } \tilde{\Phi} = \tilde{\Phi}(T;t)$.
 
 Still, this periodicity alone does not lead to any change in climates: the system never jumps over $T_2$ (see fig). % add phase plane
 
-Here the turning point, if gaussian white noise, representing various mechanisms causing $T$ fluctuations at a smaller time scale, is added to the system, yielding
+If gaussian white noise, representing various mechanisms causing $T$ fluctuations at a smaller time scale, is added to the system, yielding
 
 \begin{equation}
     \odv{T}{t} = F(T) + \sigma \eta(t)
 \end{equation}
 then for certain values of $\sigma$ a jump between stable states becomes possible, with a frequency $\approx 2\pi/10^5$.
-That is, temperature oscillations across the geological record 
+That is, the system shows temperature oscillations at the forcing frequency, as noise allows the system to jump from one equilibrium to another. %see fig
+Note that oscillations arise from the joint effect of the periodic forcing and noise: noise pushes the system away from the equilibrium at every timestep, but only when the forcing tilts the double well potential such that the distance between the current equilibrium and the unstable one becomes small enough to allow the stochastic component to push the system over it, a climate transition (that is, a jump from $T_1$ to $T_3$ or viceversa) can occur. 
+This can be seen as an ''escape'' from a stable equilibrium, requiring a jump over a (pseudo)energy potential ''wall''. This is a classic problem in physics, Kramer's rate \parencite{kramersBrownianMotionField1940} gives the frequency of jumps per second
 
+\begin{equation}
+    r_K = \frac{\sqrt{V''(x_m)/m}\sqrt{\left|V''(x_b)/m\right|}}{2\pi\gamma}e^{-\frac{\Delta V}{\sigma^2 /2}}
+\end{equation}
+where $V''(x_m)$ is the curvature around the minima, $V''(x_b)$ that at the maximum, $\Delta V$ the distance from the minimum to the maximum, and $\sigma$ the temperature of the system (noise in our context). 
+The inverse $\frac{1}{r_k}$ gives the residence time, the time spent at one of the minima.
+
+Intuitively, not all values of $\sigma$ will lead to SR, and the optimal value
 % just placeholder to understand the trajectory to be followed
 % Then, in a "sensing system" sense, the (relatively) weak $\xi$ helped to recover the weak forcing frequency $\omega$, which would have not been detected otherwise. 
 % In this sense noise may be seen as beneficial in signal processing, neurons of the first part of the sensory systems are particularly noisy signal processors.
