@@ -68,7 +68,14 @@ In our context, $T_1 \text{, } T_3$ are the only observable climates, temperatur
 This type of system where 2 stable states exist is called a bistable system, and the plot of $\Phi$ over $T$ displays the typical double well shape of the (pseudo)potential function. % add plot
 
 With the present model, we can see that the earth's climate would depend solely (all else being equal) on the starting temperature, i.e., wether it is smaller or greater than $T_2$.
-Then it would follow $F(T)$ towards $T_1$ or $T_3$. However, earth's temperatures do indeed show oscillations with a period of $10^5$ years.
+Then it would follow $F(T)$ towards $T_1$ or $T_3$ (see Figure \ref{fig:det trajs}). However, earth's temperatures do indeed show oscillations with a period of $10^5$ years.
+% here better to use a compressed (log?) scale for x after the relaxation, to show how no oscillations at 10^5 occur, as of now it goes linearly up to 50 years
+\begin{figure}
+    \label{fig:det trajs}
+    \centering
+    \includegraphics[width=0.7\textwidth]{det_conv.pdf}
+    \caption{Relaxation for different starting temperatures without noise}
+\end{figure}
 
 A weak cosinusoidal forcing modulating the input solar radiations can be introduced, representing the varying distance of the earth from the sun along its elliptic orbit. 
 Then $\mu$ becomes time dependent
@@ -79,7 +86,7 @@ Then $\mu$ becomes time dependent
 where $\gamma \ll 1$ and $\omega = 2\pi/10^5$, reflecting the observed oscillation period.
 The derivative and pseudo-energy function become time dependent $\tilde{F} = \tilde{F}(T;t) \text{, } \tilde{\Phi} = \tilde{\Phi}(T;t)$.
 
-Still, this periodicity alone does not lead to any change in climates: the system never jumps over $T_2$ (see fig). % add phase plane
+Still, this periodicity alone does not lead to any change in climates: the system never jumps over $T_2$ (see fig). % add phase plane or use 
 
 If gaussian white noise, representing various mechanisms causing $T$ fluctuations at a smaller time scale, is added to the system, yielding
 
@@ -88,16 +95,22 @@ If gaussian white noise, representing various mechanisms causing $T$ fluctuation
 \end{equation}
 then for certain values of $\sigma$ a jump between stable states becomes possible, with a frequency $\approx 2\pi/10^5$.
 That is, the system shows temperature oscillations at the forcing frequency, as noise allows the system to jump from one equilibrium to another. %see fig
-Note that oscillations arise from the joint effect of the periodic forcing and noise: noise pushes the system away from the equilibrium at every timestep, but only when the forcing tilts the double well potential such that the distance between the current equilibrium and the unstable one becomes small enough to allow the stochastic component to push the system over it, a climate transition (that is, a jump from $T_1$ to $T_3$ or viceversa) can occur. 
+Note that oscillations arise from the joint effect of the periodic forcing and noise: noise pushes the system away from the equilibrium at every timestep, but only when the forcing asymmetrically tilts the double well potential such that the distance between the current equilibrium and the unstable one becomes small enough to allow the stochastic component to push the system over it, a climate transition (that is, a jump from $T_1$ to $T_3$ or viceversa) can occur. 
 This can be seen as an ''escape'' from a stable equilibrium, requiring a jump over a (pseudo)energy potential ''wall''. This is a classic problem in physics, Kramer's rate \parencite{kramersBrownianMotionField1940} gives the frequency of jumps per second
 
 \begin{equation}
-    r_K = \frac{\sqrt{V''(x_m)/m}\sqrt{\left|V''(x_b)/m\right|}}{2\pi\gamma}e^{-\frac{\Delta V}{\sigma^2 /2}}
+    r_K = \frac{\sqrt{V''(x_m)/m}\sqrt{\left|V''(x_b)/m\right|}}{2\pi\gamma}e^{-\frac{\Delta V}{D}}
 \end{equation}
-where $V''(x_m)$ is the curvature around the minima, $V''(x_b)$ that at the maximum, $\Delta V$ the distance from the minimum to the maximum, and $\sigma$ the temperature of the system (noise in our context). 
-The inverse $\frac{1}{r_k}$ gives the residence time, the time spent at one of the minima.
+where $V''(x_m)$ is the curvature around the minima, $V''(x_b)$ that at the maximum, $\Delta V$ the distance from the minimum to the maximum, and $D = \sigma^2/2$ the temperature of the system (noise intensity in our context). 
+The inverse $\frac{1}{r_K}$ gives the residence time, the time spent at one of the minima. 
+If our condition for SR is that it allows the system to follow the subthreshold forcing, then the optimal $D$ is such that, given the forcing period $T_{\omega}$ and the residence time as a function of $D$, $T_K(D) = \frac{1}{r_K(D)}$ is
+\begin{equation}
+    T_K(D) = \frac{T_{\omega}}{2}
+\end{equation}
 
-Intuitively, not all values of $\sigma$ will lead to SR, and the optimal value
+Some useful considerations can be made on SR defined on the climate model. 
+First, it requires a system containing a nonlinearity, such that 2 stable states separeted by a potential wall exist. 
+Additionally, the period forcing must be insufficient alone to cause a crossing, though later it will be shown that the forcing assumptions can be relaxed.
 % just placeholder to understand the trajectory to be followed
 % Then, in a "sensing system" sense, the (relatively) weak $\xi$ helped to recover the weak forcing frequency $\omega$, which would have not been detected otherwise. 
 % In this sense noise may be seen as beneficial in signal processing, neurons of the first part of the sensory systems are particularly noisy signal processors.
