@@ -51,7 +51,7 @@ for i in t_start:
 
 ############## noisy solution
 np.random.seed(82)
-t_span = np.arange(0.0, 7500000, 0.5)
+t_span = np.arange(0.0, 7500000, 2)
 def det_drift_fun(y, t):
     return np.array([F(y[0], t)])
 def noise_fun(y, t):
@@ -79,9 +79,10 @@ fig1.savefig(os.path.join(save_dir, "dw_potential.pdf"), bbox_inches="tight")
 fig2, ax2 = plt.subplots()
 for i in range(num_starts):
     ax2.plot(sols[i].t, sols[i].y[0])
-ax2.set_yticks([T1,T2,T3], [r"$T_1 = 280$", r"$T_2 = 285$", r"$T_3 = 290$"])
+ax2.set_yticks([T1,T2,T3], [r"$T_1 = 280$K", r"$T_2 = 285$K", r"$T_3 = 290$K"])
 ax2.hlines([T1,T3], colors=['black', 'black'], xmin=[0, 0], xmax=[tot_time-1, tot_time-1], 
            linestyles=['--', '--'])
+ax2.set_xlabel("Years")
 fig2.savefig(os.path.join(save_dir, "det_conv.pdf"), bbox_inches="tight")
 
 # Noisy time
@@ -90,6 +91,8 @@ mid, amp = 0.5*(T1+T3), 0.5*(T3-T1)
 ax3.plot(t_span, noisy_sol[:, 0], lw=0.5, color='grey', label="T(t)")
 ax3.plot(t_span, mid + amp*np.cos(omega*t_span),
          color='black', alpha=0.6, label="forcing oscillation")
+ax3.set_ylabel("Years")
+ax3.set_xlabel(r"$T$ (K)")
 ax3.set_box_aspect(0.5)
 fig3.savefig(os.path.join(save_dir, "noise_timecourse.pdf"), bbox_inches="tight")
 
