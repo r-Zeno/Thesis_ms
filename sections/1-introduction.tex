@@ -23,10 +23,10 @@ The most common way to model temperature averages was using simple energy balanc
 
 where $C$ is the earth's thermal capacity, and $R_{in}$ and $R_{out}$ represent the total incoming and outgoing solar radiation, defined as
 
-\begin{align}
+\begin{align*}
     &R_{in} = Q\mu \\
     &R_{out} = \alpha(T)Q\mu + \varepsilon(T)
-\end{align}
+\end{align*}
 
 where $\mu$ is the average incoming solar radiation.
 
@@ -47,6 +47,7 @@ To analyze the stability of the defined climates the rate of change of temperatu
 then a pseudo-potential energy function is defined as
 
 \begin{equation}
+    \label{eq:pseudopot}
     \Phi(T) = - \int F(T) \mathrm{d}T
 \end{equation}
 
@@ -65,24 +66,24 @@ Then intuitively the maximum of $\Phi$ will be an unstable point, while the mini
 
 is $<0$, any neighboring starting state of the earth's temperature will converge to it, while when it is $>0$ they will diverge.
 
-It can be shown that $T_1 \text{, } T_3$ are stable points, while $T_2$ is unstable: a peak any starting state would ''roll off'' from (see fig). % add an appendix showing that?
+It can be shown that $T_1 \text{, } T_3$ are stable points, while $T_2$ is unstable: a peak any starting state would ''roll off'' from (see \ref{app:1}). % add an appendix showing that?
 In our context, $T_1 \text{, } T_3$ are the only observable climates, temperatures at which the earth will stay for enough time to be detectable in the geological records.
-This type of system where 2 stable states separated by an unstable state exist is called a bistable system, and the plot of $\Phi$ over $T$ displays the typical double well shape of the (pseudo)potential function (see Figure \ref{fig:double well}). % add plot
+This type of system where 2 stable states separated by an unstable state exist is called a bistable system, and the plot of $\Phi$ over $T$ displays the typical double well shape of the (pseudo)potential function (Figure \ref{fig:double well}). % add plot
 
 \begin{figure}
     \centering
     \includegraphics[width = 0.5\textwidth]{dw_potential.pdf}
-    \caption{The double well potential. Stable points filled}
+    \caption{The double well potential. Filled circles are stable points.}
     \label{fig:double well}
 \end{figure}
 
 With the present model, we can see that the earth's climate would depend solely (all else being equal) on the starting temperature, i.e., wether it is smaller or greater than $T_2$.
-Then it would follow $F(T)$ towards $T_1$ or $T_3$ (see Figure \ref{fig:det trajs}). However, earth's temperatures do indeed show oscillations with a period of $10^5$ years.
+Then it would follow $F(T)$ towards $T_1$ or $T_3$ (Figure \ref{fig:det trajs}). However, earth's temperatures do indeed show oscillations with a period of $10^5$ years.
 % here better to use a compressed (log?) scale for x after the relaxation, to show how no oscillations at 10^5 occur, as of now it goes linearly up to 50 years
 \begin{figure}
     \centering
     \includegraphics[width=0.5\textwidth]{det_conv.pdf}
-    \caption{Relaxation for different starting temperatures without noise}
+    \caption{Trajectories for different starting temperatures without noise.}
     \label{fig:det trajs}
 \end{figure}
 
@@ -107,7 +108,7 @@ That is, the system shows temperature oscillations at the forcing frequency, as 
 \begin{figure}
     \centering
     \includegraphics[width = 0.8\textwidth]{noise_timecourse.pdf}
-    \caption{Temperature over time, with noise}
+    \caption{Temperature over time from numerical solution of \ref{eq:full clim sys}, with $\sigma = 0.15$.}
     \label{fig:noisy timeseries}
 \end{figure}
 Note that oscillations arise from the joint effect of the periodic forcing and noise: noise pushes the system away from the equilibrium at every timestep, but only when the forcing asymmetrically tilts the double well potential such that the distance between the current equilibrium and the unstable one becomes small enough to allow the stochastic component to push the system over it, a climate transition (that is, a jump from $T_1$ to $T_3$ or viceversa) can occur. 
@@ -126,16 +127,37 @@ If our condition for SR is that it allows the system to follow the subthreshold 
 
 Some useful considerations can be made on SR defined on the climate model. 
 First, it requires a system containing a nonlinearity, as in \ref{eq:full clim sys}, such that 2 stable states separeted by a potential wall exist. 
-Additionally, the periodic forcing must be insufficient alone to cause a crossing (subthreshold), though later it will be shown that the forcing assumptions can be relaxed. 
+Additionally, the periodic forcing must be insufficient alone to cause a crossing (subthreshold). Later it will be shown that these assumptions can be relaxed. 
 Last, as \ref{eq:opt noise} suggests, too low $D$ will not be able to push the system over the barrier at the frequency needed, and high enough $D$ make the potential barrier effectively nonexistant, increasing $r_K$ and making the double well model meaningless.
 
 Hence, given a metric of how well the system follows the forcing, there will be a peak for a certain $D$. In this sense, there is a resonance in the system. 
 For classic SR models, the natural measure is the spectral power (obtained by Fourier transform of the system response) at the forcing frequency relative to the neighboring ones: Signal-to-Noise Ratio (SNR) \parencite{mcnamaraTheoryStochasticResonance1989}.
 
 \subsection{From Earth to neurons}
+Historically the most used (and first) model to study SR was that of \ref{eq:full clim sys}, more generally expressed as a stochastic differential equation \parencite{benziMechanismStochasticResonance1981}
+\begin{equation}
+    \label{eq:general-doublewell}
+    \odv{x}{t} = x\left(a - bx^2\right) + \mu \gamma \cos(\omega t) + \sigma\xi(t)
+\end{equation}
+where $\xi$ is gaussian white noise, and $x(a-bx^2)$ cubic term, that for $a>0$ has 3 fixed points. When defining the pseudo-potential as in \ref{eq:pseudopot} it gives the quartic polynomial that is the simplest realization of the double potential well (here ignoring forcing and noise component)
+\begin{align*}
+    \Phi &= - \int - x^3 + ax \\
+    &= \frac{b}{4}x^4 - \frac{a}{2}x^2 + C
+\end{align*}
 
+Intuitively, a neuron is a system that displays both quiescent and spiking behavior: that is, 2 stable states, separated by a ''barrier'' commonly called the voltage threshold. 
+Note that the term threshold is hardly accurate: different current values can all elicit spikes in neurons depending on stimulation duration, some neurons respond to certain stimulation frequencies at currents lower than those needed to elicit a spike with a pulse-like stimulation, and others fire in response to hyperpolarizing currents (known as a rebound spike) \cite[Chapter~1]{izhikevichDynamicalSystemsNeuroscience2006}.
 
+Unsurprisingly, a neuron can be modeled in the same form of \ref{eq:general-doublewell} to show SR \parencite{bulsaraStochasticResonanceSingle1991}. 
+More interestingly, this intution holds in accurate models. 
+
+The FitzHugh-Nagumo neuron model \parencite{} is a 2D reduction of the Ho
 % just placeholder to understand the trajectory to be followed
 % Then, in a "sensing system" sense, the (relatively) weak $\xi$ helped to recover the weak forcing frequency $\omega$, which would have not been detected otherwise. 
 % In this sense noise may be seen as beneficial in signal processing, neurons of the first part of the sensory systems are particularly noisy signal processors.
+% Intuitively, the conditions seen until now ought not be so strict: what a system needs to display SR could be simply having a stable state that is separated by some nonlinearity from another state (that in turn needs not be stable). 
+% This is a good description of a neuron.
+
+% A neuron rests at a certain voltage, and when that voltage crosses a threshold value, a spike is fired. 
+% Note that this is an extreme simplification, as the notion of voltage threshold itself is hard to define: weak ''subthreshold'' current stimulations can elicit a spike if applied for long enough, and 
 
