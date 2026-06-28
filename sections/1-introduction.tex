@@ -146,12 +146,12 @@ where $\xi$ is gaussian white noise, and $x(a-bx^2)$ cubic term, that for $a>0$ 
 \end{align*}
 
 Intuitively, a neuron is a system that displays both quiescent and spiking behavior: that is, 2 stable states, separated by a ''barrier'' commonly called the voltage threshold. 
-Note that the term threshold is hardly accurate: different current values can all elicit spikes in neurons depending on stimulation duration, some neurons respond to certain stimulation frequencies at currents lower than those needed to elicit a spike with a pulse-like stimulation, and others fire in response to hyperpolarizing currents (known as a rebound spike) \cite[Chapter~1]{izhikevichDynamicalSystemsNeuroscience2006}.
+Note that the term threshold is hardly accurate: different current values can all elicit spikes in neurons depending on stimulation duration, some neurons respond to certain stimulation frequencies at currents lower than those needed to elicit a spike with a pulse-like stimulation, and others fire in response to hyperpolarizing currents (known as a rebound spike) \cite[Chapter~7]{izhikevichDynamicalSystemsNeuroscience2006}.
 
 Unsurprisingly, a neuron can be modeled in the same form of \ref{eq:general-doublewell} to show SR \parencite{bulsaraStochasticResonanceSingle1991}. 
-More interestingly, this intution holds in accurate models. 
+Interestingly, this intution holds in more accurate neuron models. 
 
-The FitzHugh-Nagumo (FHN) neuron model \parencite{fitzhughImpulsesPhysiologicalStates1961,izhikevichFitzHughNagumoModel2006} is a 2D reduction of the Hodgkin-Huxley (HH) biophysical model \parencite{hodgkinQuantitativeDescriptionMembrane1952}, its attractivness stems from being able to recreate the spiking behavior of neurons without the 4 differential equations that regulate the HH neuron, allowing for analysis of the model using the theory of dynamical systems. 
+The FitzHugh-Nagumo (FHN) model \parencite{fitzhughImpulsesPhysiologicalStates1961,izhikevichFitzHughNagumoModel2006} is a 2D reduction of the Hodgkin-Huxley (HH) biophysical model \parencite{hodgkinQuantitativeDescriptionMembrane1952}, its attractivness stems from being able to recreate the spiking behavior of neurons without the 4 differential equations that regulate the HH neuron, allowing for easier analysis of the model using the theory of dynamical systems. 
 
 The FH model is defined by a fast and a slow variable
 \begin{align}
@@ -159,7 +159,8 @@ The FH model is defined by a fast and a slow variable
     &\odv{w}{t} = bv - cw
 \end{align}
 
-with $v$ representing the (fast) membrane voltage and $w$ the (slow) feedback recovery mechanisms of the membrane (e.g., opening of $\text{K}^+$ channels).
+with $v$ representing the (fast) membrane voltage and $w$ the (slow) feedback recovery mechanisms of the membrane (e.g., opening of $\text{K}^+$ channels). 
+
 
 
 % just placeholder to understand the trajectory to be followed
