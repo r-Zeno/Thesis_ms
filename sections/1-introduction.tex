@@ -10,6 +10,7 @@ Still, due to the physical scale of cells, a stochastic component in neuronal fu
 It is then to be expected that neural systems would have evolved to tolerate or, more daringly, exploit the presence of noise. 
 
 \subsection{Classical Stochastic Resonance}
+\label{sec:classic-SR}
 The idea of studying the effects of noise on the dynamics of a system first appeared parallely in the work of \textcite{benziStochasticResonanceClimatic1982} and \textcite{nicolisStochasticAspectsClimatic1982}, where the term Stochastic Resonance (SR) was used to explain the periodic behavior of earth's average temperature. 
 
 A brief covering of that first SR application will be made, as it provides a practical understanding of the general phenomenon and a surprising link to neural systems.
@@ -68,7 +69,7 @@ is $<0$, any neighboring starting state of the earth's temperature will converge
 
 It can be shown that $T_1 \text{, } T_3$ are stable points, while $T_2$ is unstable: a peak any starting state would ''roll off'' from (see \ref{app:1}). % add an appendix showing that?
 In our context, $T_1 \text{, } T_3$ are the only observable climates, temperatures at which the earth will stay for enough time to be detectable in the geological records.
-This type of system where 2 stable states separated by an unstable state exist is called a bistable system, and the plot of $\Phi$ over $T$ displays the typical double well shape of the (pseudo)potential function (Figure \ref{fig:double well}). % add plot
+A system where 2 stable states separated by an unstable state exist is called a bistable system, and the plot of $\Phi$ over $T$ displays the typical double well shape of the (pseudo)potential function (Figure \ref{fig:double well}). % add plot
 
 \begin{figure}
     \centering
@@ -133,6 +134,65 @@ Last, as \ref{eq:opt noise} suggests, too low $D$ will not be able to push the s
 Hence, given a metric of how well the system follows the forcing, there will be a peak for a certain $D$. In this sense, there is a resonance in the system. 
 For classic SR models, the natural measure is the spectral power (obtained by Fourier transform of the system response) at the forcing frequency relative to the neighboring ones: Signal-to-Noise Ratio (SNR) \parencite{mcnamaraTheoryStochasticResonance1989}.
 
+\subsection{Small detour on dynamical system theory}
+\label{sec:dyn-sys}
+It will be shown that neurons are better modeled by 2D systems, due to the coexistence and interaction of 2 main ionic currents that govern a neuron's state $\left(\mathrm{Na}^+ \text{ and } \mathrm{K}^+\right)$, that determine a depolarization-hyperpolarization feedback loop.
+To analyze a 2+D systems the tools of dynamical systems theory are indispensable. 
+A brief covering of the main methods will follow, as they will be referenced in the following chapters (for a more complete tractation, see \parencite{strogatzNonlinearDynamicsChaos2024}).
+
+For any 2D system defined by
+\begin{align}
+    &\dot{v} = f\left(v, u\right) \\
+    &\dot{u} = g\left(v, u\right)
+    \label{eq:gensys}
+\end{align}
+the system exists in the space $S = \left\{v\vb{e}_1+u\vb{e}_2 \;\middle|\; v,u \in \mathbb{R}\right\}$, and is always identified with the state vector $\vb{s} = \left(v,u\right)$.
+Then we can define the mapping $F:\mathbb{R}^2 \to \mathbb{R}^2$ such that $F(\vb{s}) \mapsto \left(f(\vb{s}), g(\vb{s})\right)$, the standard definition of a vector field (in $\mathbb{R}^n$). 
+Then the direction of $F(\vb{s})$ will be given by the sign of $f(\vb{s})$ and $g(\vb{s})$. So the curves defined by $f(v, u) = 0$ and $g(v, u) = 0$, the $v$- and $u$-nullclines, that separate the plane in changes in the direction of $\dot{v}$ and $\dot{u}$, are of particular interest.
+Note that $\dot{v} = \dd v(t)/\dd t$ and $\dot{u} = \dd u(t)/ \dd t$. 
+Then the evolution of the system's state from an initial position $\vb{s}(t_0) = (v(t_0), u(t_0)) = \vb{s}_0$ up to a time $t$, $\vb{s}(t)$, is governed by the flow of the vector field, formally $\varphi_t: S \to S$.
+Indeed, the trajectory $\phi_{t - t_0} (s_0)$ is a curve always tangent to $F$.
+
+All points of intersection of the nullclines are such that $\dot{v} = \dot{u} = 0$. 
+Consider the state $\vb{s}^*$ such that $f(\vb{s}^*) = g(\vb{s}^*) = 0$, if the system remains at $\vb{s}^*$ for all $t \geq 0$ then $\vb{s}^*$ is an equilibrium.
+%In a 2D system there can be 3 main types of equilibria (and many variations): nodes, saddles and focuses. 
+Equilibria can be stable or unstable, the stability of an equilibria can be probed by analyzing the response of the system at $\vb{s}^*$ to a small disturbance $\vb{s}_d$. 
+From to the time view, we are interested in $\varphi_{t_0-t}(\vb{s}_d - \vb{s}^*)$, for some time $t \geq 0$. However, the trajectory based on $f\text{, } g$ usually cannot be calculated when they are nonlinear (as is the case for \ref{eq:fhn-1}). 
+Then we use the linearization of the system near the equilibria, in linear algebra terms solving
+\begin{equation}
+    \label{eq:lin-sys}
+    \dot{\vb{s}} = \mathrm{A}\vb{s}
+    \equiv
+    \begin{pmatrix}
+        \dot{v} \\
+        \dot{u}
+    \end{pmatrix}
+    =
+    \underbrace{
+    \begin{pmatrix}
+        \pdv{f(\vb{s}^*)}{v} & \pdv{f(\vb{s}^*)}{u} \\
+        \pdv{g(\vb{s}^*)}{v} & \pdv{g(\vb{s}^*)}{u}
+    \end{pmatrix}
+    }_{\mathrm{J}}
+    \begin{pmatrix}
+        v \\
+        u
+    \end{pmatrix}
+\end{equation}
+note that in the Jacobian matrix quadratic and higher orders terms are omitted since they are evaluated on the small disturbance $\vb{s}_d - \vb{s}^*$, and so are assumed to contribute extremely little to the solution.
+
+To solve the system in \ref{eq:lin-sys} we can use the eigenvalue method (if the eigenvectors are linearly independent) where a general solution is $\vb{s}(t) = e^{\lambda t}\vb{\xi}$, where $\vb{\xi}$ is the eigenvector. 
+substituting into \ref{eq:lin-sys} we get
+\begin{equation}
+    \dot{\vb{s}} = \mathrm{A}\vb{s} \to \mathrm{A} \vb{\xi} = \lambda \vb{\xi}  
+\end{equation}
+The eigenvalues of $\mathrm{A}$ are found solving the characteristic equation $\det\left(\mathrm{A} - \lambda \mathrm{I}\right) = 0$
+
+Knowing equilibria, their type and stability, joined with knowing $F$, provides information on all possible behaviors of a system. 
+This can all be visualized plotting the equilibria and $F$, along with the nullclines, creating a \textit{phase portait}.
+
+%$F$ is useful as it gives the evolution of the system from any inital condition $\vb{s}$, as the curve traced by it (its trajectory in $S$) will always be tangent to the vector field. 
+
 \subsection{From Earth to neurons}
 Historically the most used (and first) model to study SR was that of \ref{eq:full clim sys}, more generally expressed as a stochastic differential equation \parencite{benziMechanismStochasticResonance1981}
 \begin{equation}
@@ -149,13 +209,14 @@ Intuitively, a neuron is a system that displays both quiescent and spiking behav
 Note that the term threshold is hardly accurate: different current values can all elicit spikes in neurons depending on stimulation duration, some neurons respond to certain stimulation frequencies at currents lower than those needed to elicit a spike with a pulse-like stimulation, and others fire in response to hyperpolarizing currents (known as a rebound spike) \cite[Chapter~7]{izhikevichDynamicalSystemsNeuroscience2006}.
 
 Unsurprisingly, a neuron can be modeled in the same form of \ref{eq:general-doublewell} to show SR \parencite{bulsaraStochasticResonanceSingle1991}. 
-Interestingly, this intution holds in more accurate neuron models. 
+Interestingly, the same holds in more accurate neuron models.
 
 The FitzHugh-Nagumo (FHN) model \parencite{fitzhughImpulsesPhysiologicalStates1961,izhikevichFitzHughNagumoModel2006} is a 2D reduction of the Hodgkin-Huxley (HH) biophysical model \parencite{hodgkinQuantitativeDescriptionMembrane1952}, its attractivness stems from being able to recreate the spiking behavior of neurons without the 4 differential equations that regulate the HH neuron, allowing for easier analysis of the model using the theory of dynamical systems. 
 
 The FH model is defined by a fast and a slow variable
 \begin{align}
-    &\odv{v}{t} = v\left(a-v\right)\left(v-1\right)-w+i \\
+    \label{eq:fhn-1}
+    &\odv{v}{t} = v\left(a-v\right)\left(v-1\right)-w+I \\
     &\odv{w}{t} = bv - cw
 \end{align}
 
@@ -163,35 +224,10 @@ with $v$ representing the (fast) membrane voltage and $w$ the (slow) feedback re
 The main difference of this model with \ref{eq:full clim sys} is the second equation for $w$ that allows for an additional behavior that cannot be seen in the climate model. 
 However, a cubic term for $\dot{v}$ is present and one may wonder wether the resulting double well potential is a requirement for SR. It will be shown that it is not, and that it would describe an unrealistic regime for neural function.
 
-Moving to a 2D system, the tools of dynamical systems analysis become indispensable. 
-Briefly, for any system defined by % ugly and unclear
-\begin{align}
-    &\dot{v} = f\left(v, u\right) \\
-    &\dot{u} = g\left(v, u\right)
-    \label{eq:gensys}
-\end{align}
-and the system exists in the space $S = \left\{v\vb{e}_1+u\vb{e}_2 \;\middle|\; v,u \in \mathbb{R}\right\}$, and is always identified with the state vector $\vb{s} = \left(v,u\right)$.
-Then we can define the mapping $F:\mathbb{R}^2 \to \mathbb{R}^2$ such that $F(\vb{s}) \mapsto \left(f(\vb{s}), g(\vb{s})\right)$, the standard definition of a vector field (in $\mathbb{R}^n$). 
-Then the direction of $F(\vb{s})$ will be given by the sign of $f(\vb{s})$ and $g(\vb{s})$. So the curves defined by $f(v, u) = 0$ and $g(v, u) = 0$, the $v$- and $u$-nullclines, that separate the plane in changes in the direction of $\dot{v}$ and $\dot{u}$, are of a particular interest.
-Note that $\dot{v} = \dd v(t)/\dd t$ and $\dot{u} = \dd u(t)/ \dd t$. 
-Then the evolution of the system's state from an initial position $\vb{s}(t_0) = (v(t_0), u(t_0)) = \vb{s}_0$ up to a time $t$, $\vb{s}(t)$, is governed by the flow of the vector field, formally $\phi^t: S \to S$.
-Indeed, the trajectory $\phi^{t - t_0} (s_0)$ is the curve always tangent to $F$.
-
-All points of intersection of the nullclines are such that $\dot{v} = \dot{u} = 0$, hence for $\vb{s}_0:f(\vb{s}_0) = g(\vb{s}_0) = 0$, the system would remain at $\vb{s}_0$ for all $t \geq 0$. 
-That is the definition of equilibrium. 
-Equilibria can be stable or unstable, a stable equilibrium 
-
-%$F$ is useful as it gives the evolution of the system from any inital condition $\vb{s}$, as the curve traced by it (its trajectory in $S$) will always be tangent to the vector field. 
-
-
-%then separately the lines defined by $f\left(v, w\right) = 0$ and $g\left(v, w\right) = 0$ are the $v$ and $w$ nullclines respectively, that is, the 
 
 % just placeholder to understand the trajectory to be followed
 % Then, in a "sensing system" sense, the (relatively) weak $\xi$ helped to recover the weak forcing frequency $\omega$, which would have not been detected otherwise. 
 % In this sense noise may be seen as beneficial in signal processing, neurons of the first part of the sensory systems are particularly noisy signal processors.
 % Intuitively, the conditions seen until now ought not be so strict: what a system needs to display SR could be simply having a stable state that is separated by some nonlinearity from another state (that in turn needs not be stable). 
 % This is a good description of a neuron.
-
-% A neuron rests at a certain voltage, and when that voltage crosses a threshold value, a spike is fired. 
-% Note that this is an extreme simplification, as the notion of voltage threshold itself is hard to define: weak ''subthreshold'' current stimulations can elicit a spike if applied for long enough, and 
 
