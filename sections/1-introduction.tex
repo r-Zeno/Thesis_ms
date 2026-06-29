@@ -48,7 +48,7 @@ then a pseudo-potential energy function is defined as
 
 \begin{equation}
     \label{eq:pseudopot}
-    \Phi(T) = - \int F(T) \mathrm{d}T
+    \Phi(T) = - \int F(T) \dd T
 \end{equation}
 
 that represents the "energy" needed to change the temperature across temperature values. % this should be explained more clearly
@@ -160,8 +160,31 @@ The FH model is defined by a fast and a slow variable
 \end{align}
 
 with $v$ representing the (fast) membrane voltage and $w$ the (slow) feedback recovery mechanisms of the membrane (e.g., opening of $\text{K}^+$ channels). 
+The main difference of this model with \ref{eq:full clim sys} is the second equation for $w$ that allows for an additional behavior that cannot be seen in the climate model. 
+However, a cubic term for $\dot{v}$ is present and one may wonder wether the resulting double well potential is a requirement for SR. It will be shown that it is not, and that it would describe an unrealistic regime for neural function.
+
+Moving to a 2D system, the tools of dynamical systems analysis become indispensable. 
+Briefly, for any system defined by % ugly and unclear
+\begin{align}
+    &\dot{v} = f\left(v, u\right) \\
+    &\dot{u} = g\left(v, u\right)
+    \label{eq:gensys}
+\end{align}
+and the system exists in the space $S = \left\{v\vb{e}_1+u\vb{e}_2 \;\middle|\; v,u \in \mathbb{R}\right\}$, and is always identified with the state vector $\vb{s} = \left(v,u\right)$.
+Then we can define the mapping $F:\mathbb{R}^2 \to \mathbb{R}^2$ such that $F(\vb{s}) \mapsto \left(f(\vb{s}), g(\vb{s})\right)$, the standard definition of a vector field (in $\mathbb{R}^n$). 
+Then the direction of $F(\vb{s})$ will be given by the sign of $f(\vb{s})$ and $g(\vb{s})$. So the curves defined by $f(v, u) = 0$ and $g(v, u) = 0$, the $v$- and $u$-nullclines, that separate the plane in changes in the direction of $\dot{v}$ and $\dot{u}$, are of a particular interest.
+Note that $\dot{v} = \dd v(t)/\dd t$ and $\dot{u} = \dd u(t)/ \dd t$. 
+Then the evolution of the system's state from an initial position $\vb{s}(t_0) = (v(t_0), u(t_0)) = \vb{s}_0$ up to a time $t$, $\vb{s}(t)$, is governed by the flow of the vector field, formally $\phi^t: S \to S$.
+Indeed, the trajectory $\phi^{t - t_0} (s_0)$ is the curve always tangent to $F$.
+
+All points of intersection of the nullclines are such that $\dot{v} = \dot{u} = 0$, hence for $\vb{s}_0:f(\vb{s}_0) = g(\vb{s}_0) = 0$, the system would remain at $\vb{s}_0$ for all $t \geq 0$. 
+That is the definition of equilibrium. 
+Equilibria can be stable or unstable, a stable equilibrium 
+
+%$F$ is useful as it gives the evolution of the system from any inital condition $\vb{s}$, as the curve traced by it (its trajectory in $S$) will always be tangent to the vector field. 
 
 
+%then separately the lines defined by $f\left(v, w\right) = 0$ and $g\left(v, w\right) = 0$ are the $v$ and $w$ nullclines respectively, that is, the 
 
 % just placeholder to understand the trajectory to be followed
 % Then, in a "sensing system" sense, the (relatively) weak $\xi$ helped to recover the weak forcing frequency $\omega$, which would have not been detected otherwise. 
