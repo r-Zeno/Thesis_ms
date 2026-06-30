@@ -148,16 +148,16 @@ For any 2D system defined by
 \end{align}
 the system exists in the space $S = \left\{v\vb{e}_1+u\vb{e}_2 \;\middle|\; v,u \in \mathbb{R}\right\}$, and is always identified with the state vector $\vb{s} = \left(v,u\right)$.
 Then we can define the mapping $F:\mathbb{R}^2 \to \mathbb{R}^2$ such that $F: \vb{s} \mapsto \left(f(\vb{s}), g(\vb{s})\right)$, the standard definition of a vector field (in $\mathbb{R}^n$). 
-Then the direction of $F(\vb{s})$ will be given by the sign of $f(\vb{s})$ and $g(\vb{s})$. So the curves defined by $f(v, u) = 0$ and $g(v, u) = 0$, the $v$- and $u$-nullclines, that separate the plane in changes in the sign of $\dot{v}$ and $\dot{u}$, are of particular interest.
+The direction of $F(\vb{s})$ is given by the sign of $f(\vb{s})$ and $g(\vb{s})$. So the curves defined by $f(v, u) = 0$ and $g(v, u) = 0$, the $v$- and $u$-nullclines, that separate the plane in changes in the sign of $\dot{v}$ and $\dot{u}$, are of particular interest.
 Note that $\dot{v} = \dd v(t)/\dd t$ and $\dot{u} = \dd u(t)/ \dd t$. 
-Then the evolution of the system's state from an initial position $\vb{s}(t_0) = (v(t_0), u(t_0)) = \vb{s}_0$ up to a time $t$, $\vb{s}(t)$, is governed by the flow of the vector field, formally $\varphi_{t-t_0}: S \to S$.
+Then the evolution of the system's state from an initial position $\vb{s}(t_0) = (v(t_0), u(t_0))$ up to a time $t$, $\vb{s}(t)$, is governed by the flow of the vector field, formally $\varphi_{t-t_0}: S \to S$.
 Indeed, the trajectory $\varphi_{t - t_0} (\vb{s}_0)$ is a curve always tangent to $F$.
 
 All points of intersection of the nullclines are such that $\dot{v} = \dot{u} = 0$. 
 Consider the state $\vb{s}^*$ such that $f(\vb{s}^*) = g(\vb{s}^*) = 0$, if the system remains at $\vb{s}^*$ for all $t \geq 0$ then $\vb{s}^*$ is an equilibrium.
-Equilibria can be stable or unstable, the stability of an equilibria can be probed by analyzing the response of the system at $\vb{s}^*$ to a small disturbance $\tilde{\vb{s}} = \vb{s}_d - \vb{s}^*$, such that $\left|\vb{s}^* - \vb{s}_d\right| \ll 1$. 
-Note that by definition $F(\vb{s}^*) = 0$, hence the perturbed state mapped to the vector field $F(\vb{s}_d) = F(\vb{s}^* + \tilde{\vb{s}}) \approx F(\tilde{\vb{s}})$. % not correct!
-Then, from the time-domain view, we are interested in $\varphi_{t-t_0}(\tilde{\vb{s}})$, for some time $t > 0$. 
+Equilibria can be stable or unstable, the stability of an equilibria can be probed by analyzing the response of the system near $\vb{s}^*$ to a small disturbance $\tilde{\vb{s}} = \vb{s} - \vb{s}^*$, such that $\left|\vb{s}^* - \vb{s}\right| \ll 1$. 
+Note that by definition $F(\vb{s}^*) = \vb{0}$, so $\vb{s}^*$ is treated as a constant, and $\dot{\tilde{\vb{s}}} = F(\vb{s}^* + \tilde{\vb{s}})$.
+Then, in time domain, we are interested in $\varphi_{t-t_0}(\tilde{\vb{s}})$, for some time $t > 0$. 
 
 However, the trajectory based on $f\text{, } g$ usually cannot be calculated when they are nonlinear (as is the case for \ref{eq:fhn-1}). 
 Then we use the linearization of the system near the equilibria, solving
@@ -181,18 +181,27 @@ Then we use the linearization of the system near the equilibria, solving
         \tilde{u}
     \end{pmatrix}
 \end{equation}
-note that in the Jacobian matrix quadratic and higher orders terms are omitted since they are evaluated on the small disturbance $\vb{s}_d - \vb{s}^*$, and so are assumed to contribute extremely little to the solution.
+note that in the linearization of the system quadratic and higher orders terms are omitted since they are evaluated on the small disturbance $\tilde{\vb{s}}$, and so are assumed to contribute extremely little to the solution.
 
 To solve the system in \ref{eq:lin-sys} we can use the eigenvalue method (if the eigenvectors are linearly independent) where solutions are in the form $\tilde{\vb{s}}(t) = e^{\lambda t}\vb{\xi}$, where $\vb{\xi}$ is the eigenvector. 
 substituting into \ref{eq:lin-sys} we get
 \begin{equation}
+    \label{eq:sol-to-linsys}
     \dot{\tilde{\vb{s}}} = \mathrm{J}\tilde{\vb{s}} \to \lambda e^{\lambda t}\vb{\xi} =\mathrm{J} e^{\lambda t}\vb{\xi} \to \mathrm{J} \vb{\xi} = \lambda \vb{\xi}  
 \end{equation}
 The eigenvalues of $\mathrm{J}$ are found solving the characteristic equation $\det\left(\mathrm{J} - \lambda \mathrm{I}\right) = 0$, for $2 \times 2$ matrices, this leads to a quadratic polynomial that is solved as
 \begin{equation}
     \lambda_{1,2} = \frac{\tau \pm \sqrt{\tau^2 - 4 \Delta}}{2}
 \end{equation}
-where $\tau = \mathrm{Tr}(\mathrm{J}) \text{, } \Delta = \det(\mathrm{J})$.
+where $\tau = \mathrm{Tr}(\mathrm{J}) \text{, } \Delta = \det(\mathrm{J})$, note that each eigenvalue will have its corresponding eigenvector, so our example system has $\vb{\xi}_1 \text{, } \vb{\xi}_2$.
+
+Finally, the eigenvectors of $\mathrm{J}$ form the eigenbase of the system. That is, their linear combination gives the linear approximation of $\varphi_{t-t_0}(\tilde{\vb{s}})$:
+\begin{equation}
+    \dot{\tilde{\vb{s}}} = c_1 e^{\lambda_1 t}\vb{\xi}_1 + c_2 e^{\lambda_2 t}\vb{\xi}_2
+\end{equation}
+where $c_1 \text{, } c_2$ are determined by $\tilde{\vb{s}}$.
+
+Clearly, the behavior near the equilibria will be a linear combination of exponential motion with direction determined by the signs of $\lambda_1 \text{, } \lambda_2$.
 
 Knowing equilibria, their type and stability, joined with knowing $F$, provides information on all possible behaviors of a system. 
 This can all be visualized plotting the equilibria and $F$, along with the nullclines, creating a \textit{phase portait}.
@@ -207,7 +216,7 @@ Historically the most used (and first) model to study SR was that of \ref{eq:ful
 \end{equation}
 where $\eta$ is gaussian white noise, and $x(a-bx^2)$ cubic term, that for $a>0$ has 3 fixed points. When defining the pseudo-potential as in \ref{eq:pseudopot} it gives the quartic polynomial that is the simplest realization of the double potential well (here ignoring forcing and noise component)
 \begin{align*}
-    \Phi &= - \int - x^3 + ax \\
+    \Phi &= - \int - bx^3 + ax \\
     &= \frac{b}{4}x^4 - \frac{a}{2}x^2 + C
 \end{align*}
 
