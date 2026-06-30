@@ -1,4 +1,4 @@
-\chapter{Stochastic Resonance in a Spiking Neural Network Model of the Honeybee Antennal Lobe}
+\chapter{Stochastic Resonance in the Honeybee Antennal Lobe}
 \section{Introduction}
 
 One of the first well established findings in neuroscience with the advent of electrical recordings of neuronal activity, was the variability of neurons' responses. 
@@ -134,7 +134,7 @@ Last, as \ref{eq:opt noise} suggests, too low $D$ will not be able to push the s
 Hence, given a metric of how well the system follows the forcing, there will be a peak for a certain $D$. In this sense, there is a resonance in the system. 
 For classic SR models, the natural measure is the spectral power (obtained by Fourier transform of the system response) at the forcing frequency relative to the neighboring ones: Signal-to-Noise Ratio (SNR) \parencite{mcnamaraTheoryStochasticResonance1989}.
 
-\subsection{Small detour on dynamical system theory}
+\subsection{Small detour on dynamical systems}
 \label{sec:dyn-sys}
 It will be shown that neurons are better modeled by 2D systems, due to the coexistence and interaction of 2 main ionic currents that govern a neuron's state $\left(\mathrm{Na}^+ \text{ and } \mathrm{K}^+\right)$, that determine a depolarization-hyperpolarization feedback loop.
 To analyze a 2+D systems the tools of dynamical systems theory are indispensable. 
@@ -147,25 +147,27 @@ For any 2D system defined by
     \label{eq:gensys}
 \end{align}
 the system exists in the space $S = \left\{v\vb{e}_1+u\vb{e}_2 \;\middle|\; v,u \in \mathbb{R}\right\}$, and is always identified with the state vector $\vb{s} = \left(v,u\right)$.
-Then we can define the mapping $F:\mathbb{R}^2 \to \mathbb{R}^2$ such that $F(\vb{s}) \mapsto \left(f(\vb{s}), g(\vb{s})\right)$, the standard definition of a vector field (in $\mathbb{R}^n$). 
-Then the direction of $F(\vb{s})$ will be given by the sign of $f(\vb{s})$ and $g(\vb{s})$. So the curves defined by $f(v, u) = 0$ and $g(v, u) = 0$, the $v$- and $u$-nullclines, that separate the plane in changes in the direction of $\dot{v}$ and $\dot{u}$, are of particular interest.
+Then we can define the mapping $F:\mathbb{R}^2 \to \mathbb{R}^2$ such that $F: \vb{s} \mapsto \left(f(\vb{s}), g(\vb{s})\right)$, the standard definition of a vector field (in $\mathbb{R}^n$). 
+Then the direction of $F(\vb{s})$ will be given by the sign of $f(\vb{s})$ and $g(\vb{s})$. So the curves defined by $f(v, u) = 0$ and $g(v, u) = 0$, the $v$- and $u$-nullclines, that separate the plane in changes in the sign of $\dot{v}$ and $\dot{u}$, are of particular interest.
 Note that $\dot{v} = \dd v(t)/\dd t$ and $\dot{u} = \dd u(t)/ \dd t$. 
-Then the evolution of the system's state from an initial position $\vb{s}(t_0) = (v(t_0), u(t_0)) = \vb{s}_0$ up to a time $t$, $\vb{s}(t)$, is governed by the flow of the vector field, formally $\varphi_t: S \to S$.
-Indeed, the trajectory $\phi_{t - t_0} (s_0)$ is a curve always tangent to $F$.
+Then the evolution of the system's state from an initial position $\vb{s}(t_0) = (v(t_0), u(t_0)) = \vb{s}_0$ up to a time $t$, $\vb{s}(t)$, is governed by the flow of the vector field, formally $\varphi_{t-t_0}: S \to S$.
+Indeed, the trajectory $\varphi_{t - t_0} (\vb{s}_0)$ is a curve always tangent to $F$.
 
 All points of intersection of the nullclines are such that $\dot{v} = \dot{u} = 0$. 
 Consider the state $\vb{s}^*$ such that $f(\vb{s}^*) = g(\vb{s}^*) = 0$, if the system remains at $\vb{s}^*$ for all $t \geq 0$ then $\vb{s}^*$ is an equilibrium.
-%In a 2D system there can be 3 main types of equilibria (and many variations): nodes, saddles and focuses. 
-Equilibria can be stable or unstable, the stability of an equilibria can be probed by analyzing the response of the system at $\vb{s}^*$ to a small disturbance $\vb{s}_d$. 
-From to the time view, we are interested in $\varphi_{t_0-t}(\vb{s}_d - \vb{s}^*)$, for some time $t \geq 0$. However, the trajectory based on $f\text{, } g$ usually cannot be calculated when they are nonlinear (as is the case for \ref{eq:fhn-1}). 
-Then we use the linearization of the system near the equilibria, in linear algebra terms solving
+Equilibria can be stable or unstable, the stability of an equilibria can be probed by analyzing the response of the system at $\vb{s}^*$ to a small disturbance $\tilde{\vb{s}} = \vb{s}_d - \vb{s}^*$, such that $\left|\vb{s}^* - \vb{s}_d\right| \ll 1$. 
+Note that by definition $F(\vb{s}^*) = 0$, hence the perturbed state mapped to the vector field $F(\vb{s}_d) = F(\vb{s}^* + \tilde{\vb{s}}) \approx F(\tilde{\vb{s}})$. % not correct!
+Then, from the time-domain view, we are interested in $\varphi_{t-t_0}(\tilde{\vb{s}})$, for some time $t > 0$. 
+
+However, the trajectory based on $f\text{, } g$ usually cannot be calculated when they are nonlinear (as is the case for \ref{eq:fhn-1}). 
+Then we use the linearization of the system near the equilibria, solving
 \begin{equation}
     \label{eq:lin-sys}
-    \dot{\vb{s}} = \mathrm{A}\vb{s}
+    \dot{\tilde{\vb{s}}} = \mathrm{J}\tilde{\vb{s}}
     \equiv
     \begin{pmatrix}
-        \dot{v} \\
-        \dot{u}
+        \dot{\tilde{v}} \\
+        \dot{\tilde{u}}
     \end{pmatrix}
     =
     \underbrace{
@@ -175,18 +177,22 @@ Then we use the linearization of the system near the equilibria, in linear algeb
     \end{pmatrix}
     }_{\mathrm{J}}
     \begin{pmatrix}
-        v \\
-        u
+        \tilde{v} \\
+        \tilde{u}
     \end{pmatrix}
 \end{equation}
 note that in the Jacobian matrix quadratic and higher orders terms are omitted since they are evaluated on the small disturbance $\vb{s}_d - \vb{s}^*$, and so are assumed to contribute extremely little to the solution.
 
-To solve the system in \ref{eq:lin-sys} we can use the eigenvalue method (if the eigenvectors are linearly independent) where a general solution is $\vb{s}(t) = e^{\lambda t}\vb{\xi}$, where $\vb{\xi}$ is the eigenvector. 
+To solve the system in \ref{eq:lin-sys} we can use the eigenvalue method (if the eigenvectors are linearly independent) where solutions are in the form $\tilde{\vb{s}}(t) = e^{\lambda t}\vb{\xi}$, where $\vb{\xi}$ is the eigenvector. 
 substituting into \ref{eq:lin-sys} we get
 \begin{equation}
-    \dot{\vb{s}} = \mathrm{A}\vb{s} \to \mathrm{A} \vb{\xi} = \lambda \vb{\xi}  
+    \dot{\tilde{\vb{s}}} = \mathrm{J}\tilde{\vb{s}} \to \lambda e^{\lambda t}\vb{\xi} =\mathrm{J} e^{\lambda t}\vb{\xi} \to \mathrm{J} \vb{\xi} = \lambda \vb{\xi}  
 \end{equation}
-The eigenvalues of $\mathrm{A}$ are found solving the characteristic equation $\det\left(\mathrm{A} - \lambda \mathrm{I}\right) = 0$
+The eigenvalues of $\mathrm{J}$ are found solving the characteristic equation $\det\left(\mathrm{J} - \lambda \mathrm{I}\right) = 0$, for $2 \times 2$ matrices, this leads to a quadratic polynomial that is solved as
+\begin{equation}
+    \lambda_{1,2} = \frac{\tau \pm \sqrt{\tau^2 - 4 \Delta}}{2}
+\end{equation}
+where $\tau = \mathrm{Tr}(\mathrm{J}) \text{, } \Delta = \det(\mathrm{J})$.
 
 Knowing equilibria, their type and stability, joined with knowing $F$, provides information on all possible behaviors of a system. 
 This can all be visualized plotting the equilibria and $F$, along with the nullclines, creating a \textit{phase portait}.
@@ -197,9 +203,9 @@ This can all be visualized plotting the equilibria and $F$, along with the nullc
 Historically the most used (and first) model to study SR was that of \ref{eq:full clim sys}, more generally expressed as a stochastic differential equation \parencite{benziMechanismStochasticResonance1981}
 \begin{equation}
     \label{eq:general-doublewell}
-    \odv{x}{t} = x\left(a - bx^2\right) + \mu \gamma \cos(\omega t) + \sigma\xi(t)
+    \odv{x}{t} = x\left(a - bx^2\right) + \mu \gamma \cos(\omega t) + \sigma\eta(t)
 \end{equation}
-where $\xi$ is gaussian white noise, and $x(a-bx^2)$ cubic term, that for $a>0$ has 3 fixed points. When defining the pseudo-potential as in \ref{eq:pseudopot} it gives the quartic polynomial that is the simplest realization of the double potential well (here ignoring forcing and noise component)
+where $\eta$ is gaussian white noise, and $x(a-bx^2)$ cubic term, that for $a>0$ has 3 fixed points. When defining the pseudo-potential as in \ref{eq:pseudopot} it gives the quartic polynomial that is the simplest realization of the double potential well (here ignoring forcing and noise component)
 \begin{align*}
     \Phi &= - \int - x^3 + ax \\
     &= \frac{b}{4}x^4 - \frac{a}{2}x^2 + C
