@@ -183,7 +183,7 @@ Then we use the linearization of the system near the equilibria, solving
 \end{equation}
 note that in the linearization of the system quadratic and higher orders terms are omitted since they are evaluated on the small disturbance $\tilde{\vb{s}}$, and so are assumed to contribute extremely little to the solution.
 
-To solve the system in \ref{eq:lin-sys} we can use the eigenvalue method (if the eigenvectors are linearly independent) where solutions are in the form $\tilde{\vb{s}}(t) = e^{\lambda t}\vb{\xi}$, where $\vb{\xi}$ is the eigenvector. 
+To solve the system above we can use the eigenvalue method (if the eigenvectors are linearly independent) where solutions are in the form $\tilde{\vb{s}}(t) = e^{\lambda t}\vb{\xi}$, where $\vb{\xi}$ is the eigenvector. 
 substituting into \ref{eq:lin-sys} we get
 \begin{equation}
     \label{eq:sol-to-linsys}
@@ -201,10 +201,18 @@ Finally, the eigenvectors of $\mathrm{J}$ form the eigenbase of the system. That
 \end{equation}
 where $c_1 \text{, } c_2$ are determined by $\tilde{\vb{s}}$.
 
-Clearly, the behavior near the equilibria will be a linear combination of exponential motion with direction determined by the signs of $\lambda_1 \text{, } \lambda_2$.
+Clearly, the behavior near the equilibria will be a linear combination of exponential motion along $\vb{\xi}_1 \text{, }\vb{\xi}_2$ with direction determined by the signs of $\lambda_1 \text{, } \lambda_2$.
+Each equilibria of a system can then be categorized by its eigenvalues.
 
-Knowing equilibria, their type and stability, joined with knowing $F$, provides information on all possible behaviors of a system. 
-This can all be visualized plotting the equilibria and $F$, along with the nullclines, creating a \textit{phase portait}.
+The main types of equilibria relevant to this work are
+
+\begin{itemize}
+    \item Nodes: real eigenvalues with the same sign. If $\lambda_{1,2} < 0$ the node is stable: trajectories converge to it. If $\lambda_{1,2} > 0$ unstable: trajectories diverge from it.
+    \item Saddles: real eigenvalues with opposite sign. Thus always unstable.
+    \item Focuses: complex-conjugate eigenvalues (when $\tau^2 - 4\Delta < 0$), trajectories spiral either inward or outward depending on stability. Sign of $\Re(\lambda_{1,2}) \neq 0$ determines the stability, while $\Im(\lambda_{1,2})$ determines the frequency of the rotation.
+\end{itemize}
+
+Knowing type and stability of equilibria, joined with knowing $F$, provides information on all possible behaviors of a system. 
 
 %$F$ is useful as it gives the evolution of the system from any inital condition $\vb{s}$, as the curve traced by it (its trajectory in $S$) will always be tangent to the vector field. 
 
@@ -237,7 +245,7 @@ The FH model is defined by a fast and a slow variable
 
 with $v$ representing the (fast) membrane voltage and $w$ the (slow) feedback recovery mechanisms of the membrane (e.g., opening of $\text{K}^+$ channels). 
 The main difference of this model with \ref{eq:full clim sys} is the second equation for $w$ that allows for an additional behavior that cannot be seen in the climate model. 
-However, a cubic term for $\dot{v}$ is present and one may wonder wether the resulting double well potential is a requirement for SR. It will be shown that it is not, and that it would describe an unrealistic regime for neural function.
+However, a cubic term for $\dot{v}$ is present and one may wonder wether the resulting double well potential is a requirement for SR. It will be shown that it is not, and that it would describe an unrealistic regime for neural function under SR.
 
 
 % just placeholder to understand the trajectory to be followed
