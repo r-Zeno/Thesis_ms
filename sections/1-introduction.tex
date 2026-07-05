@@ -102,7 +102,7 @@ Still, this periodicity alone does not lead to any change in climates: the syste
 If gaussian white noise, representing various mechanisms causing $T$ fluctuations at a smaller time scale, is added to the system, yielding
 
 \begin{equation}
-    \odv{T}{t} = F(T) + \sigma \eta(t)
+    \odv{T}{t} = \tilde{F}(T;t) + \sigma \eta(t)
 \end{equation}
 then for certain values of $\sigma$ a jump between stable states becomes possible, with a frequency $\approx 2\pi/10^5$.
 That is, the system shows temperature oscillations at the forcing frequency, as noise allows the system to jump from one equilibrium to another (Figure \ref{fig:noisy timeseries}).
@@ -197,7 +197,7 @@ where $\tau = \mathrm{Tr}(\mathrm{J}) \text{, } \Delta = \det(\mathrm{J})$, note
 
 Finally, the eigenvectors of $\mathrm{J}$ form the eigenbase of the system. That is, their linear combination gives the linear approximation of $\varphi_{t-t_0}(\tilde{\vb{s}})$:
 \begin{equation}
-    \dot{\tilde{\vb{s}}} = c_1 e^{\lambda_1 t}\vb{\xi}_1 + c_2 e^{\lambda_2 t}\vb{\xi}_2
+    \dot{\tilde{\vb{s}}} = c_1 e^{\lambda_1 t-t_0}\vb{\xi}_1 + c_2 e^{\lambda_2 t-t_0}\vb{\xi}_2
 \end{equation}
 where $c_1 \text{, } c_2$ are determined by $\tilde{\vb{s}}$.
 
@@ -234,17 +234,23 @@ Interestingly, the same holds in more accurate neuron models.
 
 The FitzHugh-Nagumo (FHN) model \parencite{fitzhughImpulsesPhysiologicalStates1961,izhikevichFitzHughNagumoModel2006} is a 2D reduction of the Hodgkin-Huxley (HH) biophysical model \parencite{hodgkinQuantitativeDescriptionMembrane1952}, its attractiveness stems from being able to recreate the spiking behavior of neurons without the 4 differential equations that regulate the HH neuron, allowing for easier analysis of the model using the theory of dynamical systems. 
 
-The FH model is defined by a fast and a slow variable
+The FHN model is defined by a fast and a slow variable
 \begin{align}
     \label{eq:fhn-1}
     &\odv{v}{t} = v\left(a-v\right)\left(v-1\right)-w+I \\
-    &\odv{w}{t} = bv - cw
+    &\odv{w}{t} = \varepsilon (bv - cw)
 \end{align}
 
 with $v$ representing the (fast) membrane voltage and $w$ the (slow) feedback recovery mechanisms of the membrane (e.g., opening of $\text{K}^+$ channels). 
 The main difference of this model with \ref{eq:full clim sys} is the second equation for $w$ that allows for an additional behavior that cannot be seen in the climate model. 
 However, a cubic term for $\dot{v}$ is present and one may wonder wether the resulting double well potential is a requirement for SR. It will be shown that it is not, and that it would describe an unrealistic regime for neural function under SR.
 
+To see how the 2 models are related, both can be analyzed with the methods of \ref{sec:dyn-sys}. 
+In the case of $\varepsilon \to 0$, we can treat $w$ as a constant, then it is clear that the FHN model's phase portrait is topologically equivalent to \ref{eq:general-doublewell} (see fig) for the right parameters (see \ref{app:2}).
+% here plots of both 1D systems phase portraits
+
+% work in progress
+However, the FHN 1d reduction would not have a spiking mechanism anymore, and the resulting neuron model would only show 2 resting states at different membrane voltages values $v$, exactly as in \ref{eq:full clim sys}.
 
 % just placeholder to understand the trajectory to be followed
 % Then, in a "sensing system" sense, the (relatively) weak $\xi$ helped to recover the weak forcing frequency $\omega$, which would have not been detected otherwise. 
