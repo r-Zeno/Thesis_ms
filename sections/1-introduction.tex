@@ -146,8 +146,10 @@ For any 2D system defined by
     &\dot{u} = g\left(v, u\right)
     \label{eq:gensys}
 \end{align}
-the system exists in the space $S = \left\{v\vb{e}_1+u\vb{e}_2 \;\middle|\; v,u \in \mathbb{R}\right\}$, and is always identified with the state vector $\vb{s} = \left(v,u\right)$.
-Then we can define the mapping $F:\mathbb{R}^2 \to \mathbb{R}^2$ such that $F: \vb{s} \mapsto \left(f(\vb{s}), g(\vb{s})\right)$, the standard definition of a vector field (in $\mathbb{R}^n$). 
+the system exists in the space $S = \left\{v\vb{e}_1+u\vb{e}_2 \;\middle|\; v,u \in \mathbb{R}\right\}$, defined by a set of parameters $\mathcal{P}$, and always identified with the state vector $\vb{s} = \left(v,u\right)$.
+
+% check here wether F really is clear here, or if the flow should be defined as the set {\varphi^t}_{t \in T}
+Then we define the mapping $F:\mathbb{R}^2 \to \mathbb{R}^2$ such that $F: \vb{s} \mapsto \left(f(\vb{s}), g(\vb{s})\right)$, the standard definition of a vector field (in $\mathbb{R}^n$). 
 The direction of $F(\vb{s})$ is given by the sign of $f(\vb{s})$ and $g(\vb{s})$. So the curves defined by $f(v, u) = 0$ and $g(v, u) = 0$, the $v$- and $u$-nullclines, that separate the plane in changes in the sign of $\dot{v}$ and $\dot{u}$, are of particular interest.
 Note that $\dot{v} = \dd v(t)/\dd t$ and $\dot{u} = \dd u(t)/ \dd t$. 
 Then the evolution of the system's state from an initial position $\vb{s}(t_0) = (v(t_0), u(t_0))$ up to a time $t$, $\vb{s}(t)$, is governed by the flow of the vector field, formally $\varphi_{t-t_0}: S \to S$.
@@ -232,6 +234,7 @@ Note that the term threshold is hardly accurate: different current values can al
 Unsurprisingly, a neuron can be modeled in the same form of \ref{eq:general-doublewell} to show SR \parencite{bulsaraStochasticResonanceSingle1991}. 
 Interestingly, the same holds in more accurate neuron models.
 
+\subsection{The FitzHugh-Nagumo model}
 The FitzHugh-Nagumo (FHN) model \parencite{fitzhughImpulsesPhysiologicalStates1961,izhikevichFitzHughNagumoModel2006} is a 2D reduction of the Hodgkin-Huxley (HH) biophysical model \parencite{hodgkinQuantitativeDescriptionMembrane1952}, its attractiveness stems from being able to recreate the spiking behavior of neurons without the 4 differential equations that regulate the HH neuron, allowing for easier analysis of the model using the theory of dynamical systems. 
 
 The FHN model is defined by a fast and a slow variable
@@ -246,11 +249,51 @@ The main difference of this model with \ref{eq:full clim sys} is the second equa
 However, a cubic term for $\dot{v}$ is present and one may wonder wether the resulting double well potential is a requirement for SR. It will be shown that it is not, and that it would describe an unrealistic regime for neural function under SR.
 
 To see how the 2 models are related, both can be analyzed with the methods of \ref{sec:dyn-sys}. 
-In the case of $\varepsilon \to 0$, we can treat $w$ as a constant, then it is clear that the FHN model's phase portrait is topologically equivalent to \ref{eq:general-doublewell} (see fig) for the right parameters (see \ref{app:2}).
+In the case of $\varepsilon \to 0$, we can treat $w$ as a constant, then it is clear that the FHN model's phase portrait is topologically equivalent to \ref{eq:general-doublewell} (see fig) for the right $\mathcal{P}$ (see \ref{app:2}).
 % here plots of both 1D systems phase portraits
 
 % work in progress
-However, the FHN 1d reduction does not have a spiking mechanism, and the resulting neuron model would only show 2 resting states at different membrane voltages values $v$, exactly as in \ref{eq:full clim sys}.
+However, the FHN 1d reduction does not have a spiking mechanism, and the resulting neuron model would only show 2 resting states at different membrane voltages values $v_1\text{, } v_3$, exactly as in \ref{eq:full clim sys}. 
+Thinking about biological neurons, we would be describing a neuron with a single ionic current with a depolarizing effect, so voltage would only grow, with no recovery feedback. 
+Clearly the 1d model is insufficient. 
+Inspecting the full FHN we note that it is the slow $w$, entering as a subtractive term in $v$, that causes the repolarization of the membrane. 
+
+Thanks to phase portraits we can see the exact geometry of a spike. In fig(excitable FHN) a particular set $\mathcal{P}$ is used such that only a stable node exist. 
+Additionally, the vector field is such that for an instantaneuos shift in $v$, i.e., a pulse-like input, the systems shows a large excursion from the node before returning to it: it spikes. 
+
+It is useful to clarify what is intended for instantaneuos input (or shift in $v$), as it is also the formalization of a spike event in more simplified models, that will be used later. 
+The common mathematical object used is Dirac's $\delta$
+\begin{equation}
+    \delta (x) =
+    \begin{cases}
+        0 \text{, } &x \neq 0\\
+        \infty \text{, } &x = 0
+    \end{cases}
+\end{equation}
+such that 
+\begin{equation}
+    \int_{-\infty}^{\infty} \delta (x) dx = 1
+\end{equation}
+
+Then, defining the stimulation time as $t_0$, \ref{eq:fhn-1} becomes
+\begin{align}
+    &\odv{v}{t} = v\left(a-v\right)\left(v-1\right)-w+ I(t) \\
+    &\odv{w}{t} = \varepsilon (bv - cw)
+\end{align}
+where $I(t) = Q \delta (t - t_0)$, and $Q$ is the voltage jump.
+Essentially $I(t)$ at $t_0$ shifts the whole system state vector to a new position in the state space $\tilde{\vb{s}} = \left[v + Q \text{, } w + 0\right]$, acting as a macro-perturbation from equilibrium.
+More precisely, the $\vb{s}$ travels quickly along the $v$-nullcline before slow $w$ can grow enough to pull it down.
+
+
+
+Different $\mathcal{P}$ construct different fields $F$, resulting in different equilibria, both number and type. 
+In turn leading to different spiking behaviors 
+
+
+% this better later
+% Aside from the closeness to neurobiology (that will be shown to be not so important), the majority of known neural computation strategies require a nonlinear element, this is how 
+
+
 
 % just placeholder to understand the trajectory to be followed
 % Then, in a "sensing system" sense, the (relatively) weak $\xi$ helped to recover the weak forcing frequency $\omega$, which would have not been detected otherwise. 
