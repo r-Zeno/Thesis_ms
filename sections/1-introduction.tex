@@ -216,8 +216,8 @@ The main types of equilibria relevant to this work are
 
 Knowing type and stability of equilibria, joined with knowing $F$, provides information on all possible behaviors of a system, given its initial state. 
 
-\subsection{From Earth to neurons}
-Historically the most used (and first) model to study SR was that of \ref{eq:full clim sys}, more generally expressed as a stochastic differential equation \parencite{benziMechanismStochasticResonance1981}
+\subsection{From Earth to neuron}
+Historically the first model used to study SR was that of \ref{eq:full clim sys}, more generally expressed as a stochastic differential equation \parencite{benziMechanismStochasticResonance1981}
 \begin{equation}
     \label{eq:general-doublewell}
     \odv{x}{t} = x\left(a - bx^2\right) + \mu \gamma \cos(\omega t) + \sigma\eta(t)
@@ -244,7 +244,7 @@ The FHN model is defined by a fast and a slow variable
     &\odv{w}{t} = \varepsilon (bv - cw)
 \end{align}
 
-with $v$ representing the (fast) membrane voltage and $w$ the (slow) feedback recovery mechanisms of the membrane (e.g., opening of $\text{K}^+$ channels). 
+with $v$ representing the (fast) membrane voltage and $w$ the (slow, with $\varepsilon \ll 1$) feedback recovery mechanisms of the membrane (e.g., opening of $\text{K}^+$ channels). 
 The main difference of this model with \ref{eq:full clim sys} is the second equation for $w$ that allows for an additional behavior that cannot be seen in the climate model. 
 However, a cubic term for $\dot{v}$ is present and one may wonder wether the resulting double well potential is a requirement for SR. It will be shown that it is not, and that it would describe an unrealistic regime for neural function under SR.
 
@@ -258,9 +258,17 @@ Thinking about biological neurons, we would be describing a neuron with a single
 Clearly the 1d model is insufficient. 
 Inspecting the full FHN we note that it is the slow $w$, entering as a subtractive term in $v$, that causes the repolarization of the membrane. 
 
-Thanks to phase portraits we can see the exact geometry of a spike. In fig(excitable FHN) a particular set $\mathcal{P}$ is used such that only a stable node exist (the resting state). 
-Additionally, the vector field is such that for an instantaneous shift in $v$, i.e., a pulse-like input, the systems shows a large excursion from the node before returning to it: it spikes. 
+Different $\mathcal{P}$ construct different fields $F$, resulting in different equilibria, both number and type, and bifurcations. 
+Thus the FHN can model different types of neurons, the main types are known as ''integrators'' (type-1) and ''resonators'' (type-2). 
+The 2 types have different computational properties, but both can rightly be used for primary and secondary sensory neurons (which are of interest in this chapter), depending on the type of stimulus they are supposed to receive and process.
+%In this chapter the application of SR is on stimulus detection. 
+%If our definition of optimal detection is identifying and tracking the quantity of any given input, then a type 1 ''integrator'' neuron is the natural choice. 
+%Additionally, following the optimal noise condition in \ref{eq:opt noise}, it is clear that using a type 2 ''resonator'' neuron that has an intrinsic firing frequency when excited (in dynamical systems terms, has a limit cycle attractor), would add another condition: that the timescale of the noise-induced exit from the basin of the limit cycle 
 
+%Thanks to phase portraits we can see the exact geometry of a spike. In fig(excitable FHN) a particular set $\mathcal{P}$ is used such that only a stable node exist (the resting state). 
+%Additionally, the vector field is such that for an instantaneous shift in $v$, i.e., a pulse-like input, the systems shows a large excursion from the node before returning to it: it spikes.
+
+Stimuli can be modeled as instantaneous pulse-like or smooth ramp-up/down inputs.
 It is useful to clarify what is intended for instantaneous input (or shift in $v$), as it is also the formalization of a spike event in more simplified models, that will be used later. 
 The common mathematical object used is Dirac's $\delta$
 \begin{equation}
@@ -280,25 +288,27 @@ Then, defining the stimulation time as $t_0$, \ref{eq:fhn-1} becomes
     &\odv{v(t)}{t} = v\left(a-v\right)\left(v-1\right)-w+ I(t) \\
     &\odv{w(t)}{t} = \varepsilon (bv - cw)
 \end{align}
-where $I(t) = Q \delta (t - t_0)$, and $Q$ is the voltage jump.
+where $I(t) = Q \delta (t - t_0)$, and $Q$ is the voltage jump (more correctly $Q/C$, but the membrane's capacitance is assumed $C=1$). 
 Essentially $I(t)$ at $t_0$ shifts the whole system state vector to a new position in the state space $\tilde{\vb{s}} = \left(v + Q \text{, } w + 0\right)$, acting as a macro-perturbation from equilibrium.
-Then the system travels quickly along the $v$-nullcline before the slow $w$ can grow enough to pull it down. 
 
+%To simplify even further, we can think of $Q$ as being the value that defines the voltage variable at $t_0$, such that $\vb{s}_0(Q)$: the initial state is a smooth function of the stimulus intensity. 
+%Then 
 % here on separatrix. careful because in the single equilibrium case its more involved than in the standard integrator stable node + saddle case
-
 It is to note that the $\delta$-like input is one limited way to model the stimulation that a neuron may be subjected to. 
 Often a neuron may receive multiple inputs from pre-synaptic elements that can vary in intensity, depending on many biological details. 
 Thus, another way to model stimulation is to allow $I(t)$ to vary continuously with time, mimicking the smoothing summation of incoming inputs at different timings. 
 
 From the perspective of dynamical systems, the effect is not of a perturbation on $\vb{s}$. 
-Rather, when the changes in $I$ are slow enough, the geometry of the phase portrait itself changes, as $w$ changes accordingly \footnote{Indeed, the ''threshold'' for a large excursion in $v$ would grow as $w$ is able to follow the smooth changes in $I$, motivating further our doubts on the notion of threshold in neurons.}. 
-Effectively $I$ is to be thought of as another parameter in $\mathcal{P}$.
+Rather, when the changes in $I$ are slow enough, the geometry of the phase portrait itself changes, as $w$ changes accordingly %\footnote{Indeed, the ''threshold'' for a large excursion in $v$ would grow as $w$ is able to follow the smooth changes in $I$, motivating further our doubts on the notion of threshold in neurons.}. 
+Effectively $I$ is to be thought of as another parameter in $\mathcal{P}$ that we choose to vary.
 
 As seen in \ref{sec:dyn-sys}, this is the setting for a codimension-1 bifurcation. 
-Then the neuron's response to stimulation is determined by the type of bifurcation it shows, and so are the computational properties of the neuron.
+Then, unlike $\delta$ inputs, smooth ones result in a change in the topology of the phase portrait of the system, changing its overall behavior.
 
-Different $\mathcal{P}$ construct different fields $F$, resulting in different equilibria, both number and type. 
-In turn leading to different spiking behaviors, in fig (3 examples of FHN pp and response to stim)  
+In \ref{sec:classic-SR} we saw that SR happened for an input $\mu(t)$ that was unable by itself to lift the system over the pseudopotential ''wall'' (intuitively no better tracking of $\mu(t)$ could be made otherwise).
+Therefore, it is now necessary to clarify the meaning of threshold. 
+% In turn those lead to different spiking behaviors, in fig (3 examples of FHN pp and response to stim) 3 common topological configurations of the FHN neuron are shown. 
+
 
 
 % this better later
