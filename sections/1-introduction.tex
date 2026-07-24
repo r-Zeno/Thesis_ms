@@ -259,9 +259,9 @@ Clearly the 1d model is insufficient.
 Inspecting the full FHN we note that it is the slow $w$, entering as a subtractive term in $v$, that causes the repolarization of the membrane. 
 
 Thanks to phase portraits we can see the exact geometry of a spike. In fig(excitable FHN) a particular set $\mathcal{P}$ is used such that only a stable node exist (the resting state). 
-Additionally, the vector field is such that for an instantaneuos shift in $v$, i.e., a pulse-like input, the systems shows a large excursion from the node before returning to it: it spikes. 
+Additionally, the vector field is such that for an instantaneous shift in $v$, i.e., a pulse-like input, the systems shows a large excursion from the node before returning to it: it spikes. 
 
-It is useful to clarify what is intended for instantaneuos input (or shift in $v$), as it is also the formalization of a spike event in more simplified models, that will be used later. 
+It is useful to clarify what is intended for instantaneous input (or shift in $v$), as it is also the formalization of a spike event in more simplified models, that will be used later. 
 The common mathematical object used is Dirac's $\delta$
 \begin{equation}
     \delta (x) =
@@ -277,8 +277,8 @@ such that
 
 Then, defining the stimulation time as $t_0$, \ref{eq:fhn-1} becomes
 \begin{align}
-    &\odv{v}{t} = v\left(a-v\right)\left(v-1\right)-w+ I(t) \\
-    &\odv{w}{t} = \varepsilon (bv - cw)
+    &\odv{v(t)}{t} = v\left(a-v\right)\left(v-1\right)-w+ I(t) \\
+    &\odv{w(t)}{t} = \varepsilon (bv - cw)
 \end{align}
 where $I(t) = Q \delta (t - t_0)$, and $Q$ is the voltage jump.
 Essentially $I(t)$ at $t_0$ shifts the whole system state vector to a new position in the state space $\tilde{\vb{s}} = \left(v + Q \text{, } w + 0\right)$, acting as a macro-perturbation from equilibrium.
@@ -291,14 +291,14 @@ Often a neuron may receive multiple inputs from pre-synaptic elements that can v
 Thus, another way to model stimulation is to allow $I(t)$ to vary continuously with time, mimicking the smoothing summation of incoming inputs at different timings. 
 
 From the perspective of dynamical systems, the effect is not of a perturbation on $\vb{s}$. 
-Rather, when the changes in $I$ are slow enough, the geometry of the phase portrait itself changes, as $w$ changes accordingly \footnote{Indeed, the ''threshold'' for a large exursion in $v$ would grow as $w$ is able to follow the smooth changes in $I$. Motivating further our doubts on the notion of threshold in neurons}. 
+Rather, when the changes in $I$ are slow enough, the geometry of the phase portrait itself changes, as $w$ changes accordingly \footnote{Indeed, the ''threshold'' for a large excursion in $v$ would grow as $w$ is able to follow the smooth changes in $I$, motivating further our doubts on the notion of threshold in neurons.}. 
 Effectively $I$ is to be thought of as another parameter in $\mathcal{P}$.
 
 As seen in \ref{sec:dyn-sys}, this is the setting for a codimension-1 bifurcation. 
 Then the neuron's response to stimulation is determined by the type of bifurcation it shows, and so are the computational properties of the neuron.
 
 Different $\mathcal{P}$ construct different fields $F$, resulting in different equilibria, both number and type. 
-In turn leading to different spiking behaviors 
+In turn leading to different spiking behaviors, in fig (3 examples of FHN pp and response to stim)  
 
 
 % this better later
