@@ -78,7 +78,7 @@ A system where 2 stable states separated by an unstable state exist is called a 
     \label{fig:double well}
 \end{figure}
 
-With the present model, we can see that the earth's climate would depend solely (all else being equal) on the starting temperature, i.e., wether it is smaller or greater than $T_2$.
+With the present model, we can see that the earth's climate would depend solely (all else being equal) on the starting temperature, i.e., whether it is smaller or greater than $T_2$.
 Then it would follow $F(T)$ towards $T_1$ or $T_3$ (Figure \ref{fig:det trajs}). However, earth's temperatures do indeed show oscillations with a period of $10^5$ years.
 % here better to use a compressed (log?) scale for x after the relaxation, to show how no oscillations at 10^5 occur, as of now it goes linearly up to 50 years
 \begin{figure}
@@ -148,7 +148,7 @@ For any 2D system defined by
 \end{align}
 the system exists in the space $S = \left\{v\vb{e}_1+u\vb{e}_2 \;\middle|\; v,u \in \mathbb{R}\right\}$, defined by a set of parameters $\mathcal{P}$, and always identified with the state vector $\vb{s} = \left(v,u\right)$.
 
-% check here wether F really is clear here, or if the flow should be defined as the set {\varphi^t}_{t \in T}
+% check here whether F really is clear here, or if the flow should be defined as the set {\varphi^t}_{t \in T}
 Then we define the mapping $F:\mathbb{R}^2 \to \mathbb{R}^2$ such that $F: \vb{s} \mapsto \left(f(\vb{s}), g(\vb{s})\right)$, the standard definition of a vector field (in $\mathbb{R}^n$). 
 The direction of $F(\vb{s})$ is given by the sign of $f(\vb{s})$ and $g(\vb{s})$. So the curves defined by $f(v, u) = 0$ and $g(v, u) = 0$, the $v$- and $u$-nullclines, that separate the plane in changes in the sign of $\dot{v}$ and $\dot{u}$, are of particular interest.
 Note that $\dot{v} = \dd v(t)/\dd t$ and $\dot{u} = \dd u(t)/ \dd t$. 
@@ -216,7 +216,7 @@ The main types of equilibria relevant to this work are
 
 Knowing type and stability of equilibria, joined with knowing $F$, provides information on all possible behaviors of a system, given its initial state. 
 
-\subsection{From Earth to neuron}
+\subsection{From Earth to neurons}
 Historically the first model used to study SR was that of \ref{eq:full clim sys}, more generally expressed as a stochastic differential equation \parencite{benziMechanismStochasticResonance1981}
 \begin{equation}
     \label{eq:general-doublewell}
@@ -235,6 +235,7 @@ Unsurprisingly, a neuron can be modeled in the same form of \ref{eq:general-doub
 Interestingly, the same holds in more accurate neuron models.
 
 \subsection{The FitzHugh-Nagumo model}
+\label{sec:fhn}
 The FitzHugh-Nagumo (FHN) model \parencite{fitzhughImpulsesPhysiologicalStates1961,izhikevichFitzHughNagumoModel2006} is a 2D reduction of the Hodgkin-Huxley (HH) biophysical model \parencite{hodgkinQuantitativeDescriptionMembrane1952}, its attractiveness stems from being able to recreate the spiking behavior of neurons without the 4 differential equations that regulate the HH neuron, allowing for easier analysis of the model using the theory of dynamical systems. 
 
 The FHN model is defined by a fast and a slow variable
@@ -246,7 +247,7 @@ The FHN model is defined by a fast and a slow variable
 
 with $v$ representing the (fast) membrane voltage and $w$ the (slow, with $\varepsilon \ll 1$) feedback recovery mechanisms of the membrane (e.g., opening of $\text{K}^+$ channels). 
 The main difference of this model with \ref{eq:full clim sys} is the second equation for $w$ that allows for an additional behavior that cannot be seen in the climate model. 
-However, a cubic term for $\dot{v}$ is present and one may wonder wether the resulting double well potential is a requirement for SR. It will be shown that it is not, and that it would describe an unrealistic regime for neural function under SR.
+However, a cubic term for $\dot{v}$ is present and one may wonder whether the resulting double well potential is a requirement for SR. It will be shown that it is not, and that it would describe an unrealistic regime for neural function under SR.
 
 To see how the 2 models are related, both can be analyzed with the methods of \ref{sec:dyn-sys}. 
 In the case of $\varepsilon \to 0$, we can treat $w$ as a constant, then it is clear that the FHN model's phase portrait is topologically equivalent to \ref{eq:general-doublewell} (see fig) for the right $\mathcal{P}$ (see \ref{app:2}).
@@ -256,9 +257,12 @@ In the case of $\varepsilon \to 0$, we can treat $w$ as a constant, then it is c
 However, the FHN 1d reduction does not have a spiking mechanism, and the resulting neuron model would only show 2 resting states at different membrane voltages values $v_1\text{, } v_3$, exactly as in \ref{eq:full clim sys}. 
 Thinking about biological neurons, we would be describing a neuron with a single ionic current with a depolarizing effect, so voltage would only grow, with no recovery feedback. 
 Clearly the 1d model is insufficient. 
-Inspecting the full FHN we note that it is the slow $w$, entering as a subtractive term in $v$, that causes the repolarization of the membrane. 
+Inspecting the full FHN we note that it is the slow $w$, entering as a subtractive term in $v$, that causes additional repolarization of the membrane, mapping to our biological understanding of the spiking mechanism. 
 
-Different $\mathcal{P}$ construct different fields $F$, resulting in different equilibria, both number and type, and bifurcations. 
+Then the nonlinearity we are interested in is whichever is born from the interaction of the 2 opposing forces.
+
+\subsection{Neuron types and inputs}
+Different $\mathcal{P}$ construct different fields $F$, resulting in different equilibria, both number and type, and bifurcations; all leading to different behaviors. 
 Thus the FHN can model different types of neurons, the main types are known as ''integrators'' (type-1) and ''resonators'' (type-2). 
 The 2 types have different computational properties, but both can rightly be used for primary and secondary sensory neurons (which are of interest in this chapter), depending on the type of stimulus they are supposed to receive and process.
 %In this chapter the application of SR is on stimulus detection. 
@@ -299,14 +303,21 @@ Often a neuron may receive multiple inputs from pre-synaptic elements that can v
 Thus, another way to model stimulation is to allow $I(t)$ to vary continuously with time, mimicking the smoothing summation of incoming inputs at different timings. 
 
 From the perspective of dynamical systems, the effect is not of a perturbation on $\vb{s}$. 
-Rather, when the changes in $I$ are slow enough, the geometry of the phase portrait itself changes, as $w$ changes accordingly %\footnote{Indeed, the ''threshold'' for a large excursion in $v$ would grow as $w$ is able to follow the smooth changes in $I$, motivating further our doubts on the notion of threshold in neurons.}. 
+Rather, when the changes in $I$ are slow enough, the geometry of the phase portrait itself changes, as $w$ changes accordingly. %\footnote{Indeed, the ''threshold'' for a large excursion in $v$ would grow as $w$ is able to follow the smooth changes in $I$, motivating further our doubts on the notion of threshold in neurons.}. 
 Effectively $I$ is to be thought of as another parameter in $\mathcal{P}$ that we choose to vary.
 
 As seen in \ref{sec:dyn-sys}, this is the setting for a codimension-1 bifurcation. 
 Then, unlike $\delta$ inputs, smooth ones result in a change in the topology of the phase portrait of the system, changing its overall behavior.
 
-In \ref{sec:classic-SR} we saw that SR happened for an input $\mu(t)$ that was unable by itself to lift the system over the pseudopotential ''wall'' (intuitively no better tracking of $\mu(t)$ could be made otherwise).
+In \ref{sec:classic-SR} we saw that SR happens for an input $\mu(t)$ that was unable by itself to lift the system over the pseudopotential ''wall'' (intuitively no better tracking of $\mu(t)$ could be made otherwise). 
+It is clear that for neurons the ''wall'' is the difference between the spiking and non-spiking state. 
 Therefore, it is now necessary to clarify the meaning of threshold. 
+
+\subsection{Neural nonlinearity, or threshold phenomena}
+The usual working definition of a threshold is a membrane voltage value $v_{\vartheta}$ that when reached is followed by a large excursion in $v$, while no excursion is present for $v < v_{\vartheta}$. 
+The discontinuity in the trajectories of $v$ near $v_{\vartheta}$ is our wall to be crossed. 
+However, looking at the vector fields depicted in the phase portraits, it is unclear whether there really is such a threshold value. 
+
 % In turn those lead to different spiking behaviors, in fig (3 examples of FHN pp and response to stim) 3 common topological configurations of the FHN neuron are shown. 
 
 
