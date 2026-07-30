@@ -9,7 +9,7 @@ Sources of noise in neurons are many and not all variability in response is due 
 Still, due to the physical scale of cells, a stochastic component in neuronal function is inevitable by thermal noise alone. % cite something
 It is then to be expected that neural systems would have evolved to tolerate or, more daringly, exploit the presence of noise. 
 
-\subsection{Classical Stochastic Resonance}
+\subsection{Classical stochastic resonance}
 \label{sec:classic-SR}
 The idea of studying the effects of noise on the dynamics of a system first appeared parallely in the work of \textcite{benziStochasticResonanceClimatic1982} and \textcite{nicolisStochasticAspectsClimatic1982}, where the term Stochastic Resonance (SR) was used to explain the periodic behavior of earth's average temperature. 
 
@@ -152,14 +152,14 @@ the system exists in the space $S = \left\{v\vb{e}_1+u\vb{e}_2 \;\middle|\; v,u 
 Then we define the mapping $F:\mathbb{R}^2 \to \mathbb{R}^2$ such that $F: \vb{s} \mapsto \left(f(\vb{s}), g(\vb{s})\right)$, the standard definition of a vector field (in $\mathbb{R}^n$). 
 The direction of $F(\vb{s})$ is given by the sign of $f(\vb{s})$ and $g(\vb{s})$. So the curves defined by $f(v, u) = 0$ and $g(v, u) = 0$, the $v$- and $u$-nullclines, that separate the plane in changes in the sign of $\dot{v}$ and $\dot{u}$, are of particular interest.
 Note that $\dot{v} = \dd v(t)/\dd t$ and $\dot{u} = \dd u(t)/ \dd t$. 
-Then the evolution of the system's state from an initial position $\vb{s}(t_0) = (v(t_0), u(t_0))$ up to a time $t$, $\vb{s}(t)$, is governed by the flow of the vector field, formally $\varphi_{t-t_0}: S \to S$.
-Indeed, the trajectory $\varphi_{t - t_0} (\vb{s}_0)$ is a curve always tangent to $F$.
+Then the evolution of the system's state from an initial position $\vb{s}(t_0) = (v(t_0), u(t_0))$ up to a time $t$, $\vb{s}(t)$, is governed by the flow of the vector field, formally $\varphi^{t}: S \to S$.
+Indeed, the trajectory $\varphi^{t - t_0} (\vb{s}_0)$ is a curve always tangent to $F$.
 
 All points of intersection of the nullclines are such that $\dot{v} = \dot{u} = 0$. 
 Consider the state $\vb{s}^*$ such that $f(\vb{s}^*) = g(\vb{s}^*) = 0$, if the system remains at $\vb{s}^*$ for all $t \geq 0$ then $\vb{s}^*$ is an equilibrium.
 Equilibria can be stable or unstable, the stability of an equilibria can be probed by analyzing the response of the system near $\vb{s}^*$ to a small disturbance $\tilde{\vb{s}} = \vb{s} - \vb{s}^*$, such that $\left|\vb{s}^* - \vb{s}\right| \ll 1$. 
 Note that by definition $F(\vb{s}^*) = \vb{0}$, so $\vb{s}^*$ is treated as a constant, and $\dot{\tilde{\vb{s}}} = F(\vb{s}^* + \tilde{\vb{s}})$.
-Then, in time domain, we are interested in $\varphi_{t-t_0}(\tilde{\vb{s}})$, for some time $t > 0$. 
+Then, in time domain, we are interested in $\varphi^{t}(\tilde{\vb{s}})$, for some time $t > t_0 = 0$. 
 
 However, the trajectory based on $f\text{, } g$ usually cannot be calculated when they are nonlinear (as is the case for \ref{eq:fhn-1}). 
 Then we use the linearization of the system near the equilibria, solving
@@ -197,7 +197,7 @@ The eigenvalues of $\mathrm{J}$ are found solving the characteristic equation $\
 \end{equation}
 where $\tau = \mathrm{Tr}(\mathrm{J}) \text{, } \Delta = \det(\mathrm{J})$, note that each eigenvalue will have its corresponding eigenvector, so our example system has $\vb{\xi}_1 \text{, } \vb{\xi}_2$.
 
-Finally, the eigenvectors of $\mathrm{J}$ form the eigenbase of the system. That is, their linear combination gives the linear approximation of $\varphi_{t-t_0}(\tilde{\vb{s}})$:
+Finally, the eigenvectors of $\mathrm{J}$ form the eigenbase of the system. That is, their linear combination gives the linear approximation of $\varphi^{t}(\tilde{\vb{s}})$:
 \begin{equation}
     \dot{\tilde{\vb{s}}} = c_1 e^{\lambda_1 t-t_0}\vb{\xi}_1 + c_2 e^{\lambda_2 t-t_0}\vb{\xi}_2
 \end{equation}
@@ -316,7 +316,26 @@ Therefore, it is now necessary to clarify the meaning of threshold.
 \subsection{Neural nonlinearity, or threshold phenomena}
 The usual working definition of a threshold is a membrane voltage value $v_{\vartheta}$ that when reached is followed by a large excursion in $v$, while no excursion is present for $v < v_{\vartheta}$. 
 The discontinuity in the trajectories of $v$ near $v_{\vartheta}$ is our wall to be crossed. 
-However, looking at the vector fields depicted in the phase portraits, it is unclear whether there really is such a threshold value. 
+However, looking at the vector fields depicted in the phase portraits, it is unclear whether there really is such a threshold value.
+
+Indeed, consider the general system $\dot{\vb{x}} = f(\vb{x})$ with $\vb{x}\in \mathbb{R}^n$, and the flow $\varphi^t (\vb{x}_0)$ defined on it. 
+It can be proven (see \cite[Chapter 2]{perkoDifferentialEquationsDynamical2009}) that if the partial derivatives of the system are continuous in an open set $X \subset \mathbb{R}^n$, then it is locally Lipschitz on $X$, that is, for every initial condition $\vb{x}_0 \in X$ there exist a set $N_{\varepsilon}(\vb{x}_0) \subset X$
+\begin{equation}
+    N_{\varepsilon}(\vb{x}_0) = \left\{\vb{x}\in \mathbb{R}^n \;|\; \left|\vb{x} - \vb{x}_0\right| < \varepsilon\right\}
+\end{equation}
+such that for $\vb{x}_1 \text{, } \vb{x}_2 \in N_\varepsilon (\vb{x}_0)$ and constant $K$
+\begin{equation}
+    \left|f(\vb{x}_1) - f(\vb{x}_2)\right| \leq K\left|\vb{x}_1 - \vb{x}_2\right| \text{.}
+\end{equation}
+Then for close starting points the evolution $\varphi^t(\vb{x}_1) \text{, } \varphi^t(\vb{x}_2)$ divergence is bounded at an exponential rate $e^{Kt}$, that is: no instantaneous discontinuity can arise.
+
+Now consider the FHN in its simplest configuration: having a unique equilibrium that is a stable node, and $t^*$ as a fixed time at which we expect the action potential peak to be, and $Q \subset \mathbb{R}$ as the open set of input values. 
+To simplify our analysis, we consider our system starting at the stimulation time $t_0$, so $\vb{s}_0(q)$ gives the initial state as a continuous function of the input $q \in Q$, defined as $s_0: Q \to \mathbb{R}^2$. 
+The FHN has indeed bounded solutions \cite{kostovaFITZHUGHNAGUMOREVISITED2004}, so the Lipschitz condition applies. 
+Therefore if we wanted to identify a $q_\vartheta \in Q$ such that a discontinuity (almost instantaneous divergence for $t^* > t_0$) exists between $\varphi^{t^*}(\vb{s}_0(q_\vartheta)) \text{ and } \varphi^{t^*}(\vb{s}_0(q_1))$ for any arbitrarly close $q_\vartheta \text{, } q_1 \in Q$ we would be out of luck.
+
+However real neurons do show an all-or-none response, which we wish our models to capture. 
+
 
 % In turn those lead to different spiking behaviors, in fig (3 examples of FHN pp and response to stim) 3 common topological configurations of the FHN neuron are shown. 
 
