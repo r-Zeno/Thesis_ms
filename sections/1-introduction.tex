@@ -337,7 +337,7 @@ Now consider the FHN in its simplest configuration: having a unique equilibrium 
 The $v$-nullcline divides the state space in regions of $\dot{v} > 0$ and $\dot{v} < 0$: under it voltage grows quickly before coming back to the stable node, while above it it decreases. 
 Then a spike would be a trajectory that travels to the right of the unstable branch of the $v$-nullcline and crosses it after the right knee, while a subthreshold response would cross the $v$-nullcline almost immediately, with no visible spike.
 
-To simplify our analysis, we consider our system starting at the stimulation time $t_0$, $\vb{s}_0 = (v_0, w_0)$ the stable node coordinates, and $\gamma_0(q)$ giving the initial state as a continuous function of the input $q \in Q$ as
+To simplify our analysis, we consider our system starting at the stimulation time $t_0$, $\vb{s}_0 = (v_0, w_0)$ the stable node coordinates, and $\gamma_0(q)$ giving the initial state as a continuous function of the input $q \in Q \subset \mathbb{R}$ as
 \begin{equation}
     \gamma_0 : Q \to \mathbb{R}^2 \text{, } q \mapsto (v_0 + q, w_0)
 \end{equation}
@@ -345,6 +345,22 @@ Having a single asymptotically stable equilibrium and polynomial derivative the 
 Therefore, if we wanted to identify a $q_\vartheta \in Q$ such that a discontinuity (almost instantaneous divergence for $t^* > t_0$) exists between $\varphi^{t^*}(\gamma_0(q_\vartheta))$ and $\varphi^{t^*}(\gamma_0(q_1))$ for any arbitrarly close $q_\vartheta \text{, } q_1 \in Q$ we would be out of luck.
 
 That is, across $Q$ we will encounter trajectories that travel along the unstable branch up to the right knee before going to the $\dot{v}<0$ region (also called canards): those are intermediate amplitude responses.
+
+Consider the FHN system of ODEs as $\dot{\vb{s}} = f(\vb{s})$ and with
+\begin{equation}
+    f(v,w) = \left( v - \frac{v^3}{3} - w -I, \varepsilon(v + a - bw) \right)
+\end{equation}
+
+It can be proven that the FHN has a compact and invariant rectangular subset (the trapping region) \cite{kostovaFITZHUGHNAGUMOREVISITED2004} $U \subset \mathbb{R}^2$. 
+Given that $f$ is a polynomial, it is smooth on $\mathbb{R}^2$, then it also is in $U$. 
+This means that it is Lipschitz continuous on $U$, that is, there exist a constant $L$ such that
+\begin{equation}
+    \left|f(\vb{s}_1) - f(\vb{s}_2)\right| \leq L\left|\vb{s}_1 - \vb{s}_2\right|
+\end{equation}
+
+Additionally, Gronwall's inequality applies, so the divergence at any time $t>0$ is
+
+
 
 % In turn those lead to different spiking behaviors, in fig (3 examples of FHN pp and response to stim) 3 common topological configurations of the FHN neuron are shown. 
 
