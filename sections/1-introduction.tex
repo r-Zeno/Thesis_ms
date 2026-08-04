@@ -318,56 +318,21 @@ The usual working definition of a threshold is a membrane voltage value $v_{\var
 The discontinuity in the trajectories of $v$ near $v_{\vartheta}$ is our wall to be crossed. 
 However, looking at the vector fields depicted in the phase portraits, it is unclear whether there really is such a threshold value.
 
-Indeed, consider the general system $\dot{\vb{x}} = f(\vb{x})$ with $\vb{x}\in \mathbb{R}^n$, and the flow $\varphi^t (\vb{x}_0)$ defined on it. 
-It can be proven (see \cite[Chapter 2]{perkoDifferentialEquationsDynamical2009}) that if the partial derivatives of the system are continuous in an open set $X \subset \mathbb{R}^n$, then it is locally Lipschitz on $X$, that is, for every point $\vb{x}_0 \in X$ there exist a set $N_{\varepsilon}(\vb{x}_0) \subset X$
-\begin{equation}
-    N_{\varepsilon}(\vb{x}_0) = \left\{\vb{x}\in \mathbb{R}^n \;|\; \left|\vb{x} - \vb{x}_0\right| < \varepsilon\right\}
-\end{equation}
-such that for $\vb{x}_1 \text{, } \vb{x}_2 \in N_\varepsilon (\vb{x}_0)$ and constant $L$
-\begin{equation}
-    \left|f(\vb{x}_1) - f(\vb{x}_2)\right| \leq L\left|\vb{x}_1 - \vb{x}_2\right| \text{.}
-\end{equation}
-% remove N_eps for local L, instead it has a uniform L if f(x) is C^1 in R^n and X is compact invariant set, subset of R^n
-Then if $f(\vb{x})$ is continuously differentiable on a closed invariant set, for arbitrarly close starting points the trajectory divergence is bounded by Gronwall's inequality to
-\begin{equation}
-    \left| \varphi^t(\vb{x}_1) - \varphi^t(\vb{x}_2) \right| \leq e^{Lt} \left|\vb{x}_1 - \vb{x}_2\right|
-\end{equation}
+Indeed, consider the FHN in its simplest configuration: having a unique globally attracting stable equilibrium, this means that any excitation of the system will eventually converge to it. 
+This mirrors our understanding of a neuron with a preferred resting state that after stimulation relaxes back to it.
 
-Now consider the FHN in its simplest configuration: having a unique equilibrium that is a stable node (see fig[FHN unique eq]), and $t^*$ as a fixed time at which we expect the action potential peak to be, and $Q \subset \mathbb{R}$ as the open set of input values. 
-The $v$-nullcline divides the state space in regions of $\dot{v} > 0$ and $\dot{v} < 0$: under it voltage grows quickly before coming back to the stable node, while above it it decreases. 
-Then a spike would be a trajectory that travels to the right of the unstable branch of the $v$-nullcline and crosses it after the right knee, while a subthreshold response would cross the $v$-nullcline almost immediately, with no visible spike.
+The FHN system so defined does not have any discontinuity in its vector flow, no all-or-none response can arise theoretically (see \ref{app:quasi-threshold} for an argument). 
+In fig [fig monstable] such a system is depicted. 
+The phase portrait is divided by the $w/v$-nullclines in 4 regions, depending on the direction of $(\dot{v}, \dot{w})$, a $\delta$-like stimulus may push the system state vector $\vb{s}$ in either the $(\dot{v}<0, \dot{w}>0)$ or the $(\dot{v}>0, \dot{w}>0)$ regions. 
+In the former case $\vb{s}$ will quickly return to $\vb{s}_0$, while in the latter it will go quickly to the right of the unstable middle branch of the $v$-nullclines and cross it after its right knee, then coming back to $\vb{s}_0$ as $\dot{v}<0$. 
 
-To simplify our analysis, we consider our system starting at the stimulation time $t_0$, $\vb{s}_0 = (v_0, w_0)$ the stable node coordinates, and $\gamma_0(q)$ giving the initial state as a continuous function of the input $q \in Q \subset \mathbb{R}$ as
-\begin{equation}
-    \gamma_0 : Q \to \mathbb{R}^2 \text{, } q \mapsto (v_0 + q, w_0)
-\end{equation}
-Having a single asymptotically stable equilibrium and polynomial derivative the system is bounded in a trapping region $K$, hence satisfaying the Lipschitz condition. 
-Therefore, if we wanted to identify a $q_\vartheta \in Q$ such that a discontinuity (almost instantaneous divergence for $t^* > t_0$) exists between $\varphi^{t^*}(\gamma_0(q_\vartheta))$ and $\varphi^{t^*}(\gamma_0(q_1))$ for any arbitrarly close $q_\vartheta \text{, } q_1 \in Q$ we would be out of luck.
+However, for the right stimulation, the system may also travel along the middle branch of $v$-nullcline up to the right knee before jumping to a stable branch. 
+infact, there exist a set of those intermediate trajectories (canards), also called the slow manifold, as at the $v$-nullcline $\dot{v} = 0$ and the dynamics are then governed by the slow $w$ variable. 
 
-That is, across $Q$ we will encounter trajectories that travel along the unstable branch up to the right knee before going to the $\dot{v}<0$ region (also called canards): those are intermediate amplitude responses.
-
-Consider the FHN system of ODEs as $\dot{\vb{s}} = f(\vb{s})$ and with
-\begin{equation}
-    f(v,w) = \left( v - \frac{v^3}{3} - w -I, \varepsilon(v + a - bw) \right)
-\end{equation}
-
-It can be proven that the FHN has a compact and invariant rectangular subset (the trapping region) \cite{kostovaFITZHUGHNAGUMOREVISITED2004} $U \subset \mathbb{R}^2$. 
-Given that $f$ is a polynomial, it is smooth on $\mathbb{R}^2$, then it also is in $U$. 
-This means that it is Lipschitz continuous on $U$, that is, there exist a constant $L$ such that
-\begin{equation}
-    \left|f(\vb{s}_1) - f(\vb{s}_2)\right| \leq L\left|\vb{s}_1 - \vb{s}_2\right|
-\end{equation}
-
-Additionally, Gronwall's inequality applies, so the divergence at any time $t>0$ is
-
-Indeed, consider the general system of ODEs $\dot{\vb{x}} = f(\vb{x})$, with $\vb{x} \in \mathbb{R}^n$. 
-By the existence and uniqueness theorem \cite{perkoDifferentialEquationsDynamical2009}, if $f: \mathbb{R}^n \to \mathbb{R}^n$ is smooth on the open $U \subset \mathbb{R}^n$, then there exist a unique function
-\begin{equation}
-    \vb{x} = x(t, \vb{x}_0) \text{, } x: \mathbb{R}^1 \times \mathbb{R}^n \mapsto \mathbb{R}^n
-\end{equation} 
-smooth in $(t,x)$
-
-
+Variable amplitude action potential are also present in biological neurons \cite{clayExcitabilitySquidGiant1998}, but the overwhelming majority of observations points to single threshold values and all-or-none responses. 
+This is due to the thinness of the slow manifold, given the unstability of the middle branch few trajectories follow it for enough time. 
+Indeed, The size of the interval is of order $O(e^{-c/\varepsilon})$, where $c$ is a positive constant and $\varepsilon \ll 1$ is the separation between the fast and slow time scales \cite{guckenheimerNUMERICALCOMPUTATIONCANARDS2000}. 
+Then in the physical world 
 
 % In turn those lead to different spiking behaviors, in fig (3 examples of FHN pp and response to stim) 3 common topological configurations of the FHN neuron are shown. 
 

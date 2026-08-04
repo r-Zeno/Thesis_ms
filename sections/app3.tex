@@ -1,0 +1,47 @@
+\chapter{No threshold in monostable FHN}
+\label{app:quasi-threshold}
+Consider the FHN system in a configuration having a unique globally attracting stable equilibrium $\vb{s}_0 = \left(v_0, w_0\right)$.
+
+Take $\dot{\vb{s}} = f(\vb{s})$ as
+\begin{equation}
+    f(v,w) = \left( v - \frac{v^3}{3} - w -I, \varepsilon(v + a - bw) \right)
+\end{equation}
+then $f:\mathbb{R}^2 \to \mathbb{R}^2$ is smooth on $R^2$. 
+We define a stimulation function continuous on a compact set of inputs values $Q = \left[0, q_{max}\right] \subset \mathbb{R}$, modeling an instantaneous stimulation
+\begin{equation}
+    \gamma:Q \to \mathbb{R}^2 \text{, } q \mapsto \left(v_0 + q , w_0\right)
+\end{equation}
+then $A = \gamma(Q) \subset \mathbb{R}^2$ is the compact set of starting states after stimulation. 
+We are interested in the properties of the flow originating from $A$ for all $t \geq 0$. 
+
+By definition of a stable equilibrium, for any neighborhood $U \supset \vb{x}_0$ there exist a $V \supset \vb{x}_0$ such that $\varphi^t(\vb{x}) \in U$ for all $\vb{x} \in V$ and $t > 0$. 
+That is, once entered in $V$, the orbit never leaves $U$ (Lyupanov stability). 
+Because of global attraction of $\vb{s}_0$, it is guaranteed that there exist a time for which $\varphi^t(\vb{a})$ is inside any $W \supset \vb{s}_0$. 
+% Then we take $\mathrm{T}^e(B(\vb{a}))$ as the time in which all $\varphi^t(B(\vb{a})) \in V$ for a sufficiently small neighborhood $B(\vb{a}) \supset \vb{a}$. %not the right wording: there always exist a B(a) chosen a time in which a is inside V, T(a). here i reversed the order?
+Since $A$ is compact, there are always finitely many such $B(\vb{a}) \in A$. 
+
+Hence we can define
+\begin{equation}
+    \mathrm{T}^* = \max \left\{\mathrm{T}^e(B(\vb{a}_1)), \dots , \mathrm{T}^e(B(\vb{a}_n))\right\}
+\end{equation}
+as the time at which all orbits starting at $A$ are guaranteed to be in $U$, it follows that $\left\{\varphi^t(A)\right\}_{t \in [0, \mathrm{T}^*]}$ is a bounded set of continuous trajectories. 
+For Lyupanov stability, once entered $V$ all orbit stay in $U$ for all time, and for asymptotic stability of $\vb{s}_0$ all $\varphi^t(\vb{x}) \to \vb{s}_0$ as $t \to \infty$. 
+So $\left\{\varphi^t(A)\right\}_{t>\mathrm{T}^*}$ is bounded. 
+
+Now we consider the complete flow from $A$ as the closed set
+\begin{equation}
+    C = \left\{\varphi^t(A)\right\}_{t \in [0, \mathrm{T}^*]} \cup \left\{\varphi^t(A)\right\}_{t>\mathrm{T}^*}
+\end{equation}
+since both elements are bounded, $C$ is a closed and bounded set in $\mathbb{R}^2$, so compact. 
+
+Therefore smooth $f$ is Lipstichz continuous on $C$, that is, there exist a uniform $L$ such that
+\begin{equation}
+    \left|f(x) - f(y)\right| = L \left|x - y\right|
+\end{equation}
+for all $x, y \in C$, and Gronwall's inequality applies
+\begin{equation}
+    \left|\varphi^t(x) - \varphi^t(y)\right| = e^{Lt}\left|x - y\right|
+\end{equation}
+for all $x, y \in C$. 
+Thus for any closed interval in $A$, the resulting flow is always continuous. 
+That is, for every $q \in Q$ there will alwasy be
