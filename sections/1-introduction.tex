@@ -330,9 +330,21 @@ However, for the right stimulation, the system may also travel along the middle 
 infact, there exist a set of those intermediate trajectories (canards), also called the slow manifold, as at the $v$-nullcline $\dot{v} = 0$ and the dynamics are then governed by the slow $w$ variable. 
 
 Variable amplitude action potential are also present in biological neurons \cite{clayExcitabilitySquidGiant1998}, but the overwhelming majority of observations points to single threshold values and all-or-none responses. 
-This is due to the thinness of the slow manifold, given the unstability of the middle branch few trajectories follow it for enough time. 
+This is due to the thinness of the slow manifold, given the unstability of the middle branch few trajectories follow it for enough time to produce the intermediate response. 
 Indeed, The size of the interval is of order $O(e^{-c/\varepsilon})$, where $c$ is a positive constant and $\varepsilon \ll 1$ is the separation between the fast and slow time scales \cite{guckenheimerNUMERICALCOMPUTATIONCANARDS2000}. 
-Then in the physical world 
+Then in the physical world channel noise alone would make it impossible to remain on the slow manifold, that can be regarded in realistic conditions as a ''quasi-threshold'' or a threshold manifold \cite{fitzhughMathematicalModelsThreshold1955}. 
+
+Monostable models are usually near an Hopf bifurcation, hence resonators. 
+Integrators are instead modeled by systems near saddle-node bifurcations, then at least a node and a saddle must exist in the state space. 
+Assuming a $\delta$ input that shifts the state vector $\vb{s}$ from the stable node (again, the resting state), if $Q$ moves $\vb{s}$ to the left of the stable branch of the saddle point, $\vb{s}$ trajectory is first dominated by the negative eigenvalue, then by then positive, being repelled back to the node. 
+That is, no large excursion happens. 
+When $Q$ is large enough to move $\vb{s}$ to the right of the stable branch, the system follows again the eigenvector with the negative eigenvalue, but is then repelled to the right, resulting in a large excursion in $v$ (see Fig [saddle-node fig]). 
+Therefore in integrators there exist a real discontinuity: the stable branch of the saddle, called the separatrix, represents a set of thresholds \cite{mitryExcitableNeuronsFiring2013}. 
+
+Various models and (quasi)threshold phenomena have been described, returning to the arguments in \ref{sec:classic-SR}, it is clear that nonlinear elements in neurons create different types of nonlinearity in responses. 
+However, once biological parameter ranges are taken into consideration, the difference between a spike and a non-spike response is what constitues our ''wall'' to be crossed. 
+Note that the different dynamical properties of the different models have an important role in the neurocomputational characteristics of neurons, but for the purpose of studying SR for recovery of an external input that simple concept is all we need. 
+Indeed, SR is found in different dynamical configurations of the FHN.
 
 % In turn those lead to different spiking behaviors, in fig (3 examples of FHN pp and response to stim) 3 common topological configurations of the FHN neuron are shown. 
 
