@@ -17,7 +17,7 @@ We are interested in the properties of the flow originating from $A$ for all $t 
 By definition of a stable equilibrium, for any neighborhood $U \supset \vb{x}_0$ there exist a $V \supset \vb{x}_0$ such that $\varphi^t(\vb{x}) \in U$ for all $\vb{x} \in V$ and $t > 0$. 
 That is, once entered in $V$, the orbit never leaves $U$ (Lyupanov stability). 
 Because of global attraction of $\vb{s}_0$, it is guaranteed that there exist a time for which $\varphi^t(\vb{a})$ is inside any $W \supset \vb{s}_0$. 
-% Then we take $\mathrm{T}^e(B(\vb{a}))$ as the time in which all $\varphi^t(B(\vb{a})) \in V$ for a sufficiently small neighborhood $B(\vb{a}) \supset \vb{a}$. %not the right wording: there always exist a B(a) chosen a time in which a is inside V, T(a). here i reversed the order?
+Then we take $\mathrm{T}^e(B(\vb{a}))$ as the time in which all $\varphi^t(B(\vb{a})) \in V$ for a sufficiently small neighborhood $B(\vb{a}) \supset \vb{a}$. %not the right wording: there always exist a B(a) chosen a time in which a is inside V, T(a). here i reversed the order?
 Since $A$ is compact, there are always finitely many such $B(\vb{a}) \in A$. 
 
 Hence we can define
@@ -40,8 +40,26 @@ Therefore smooth $f$ is Lipstichz continuous on $C$, that is, there exist a unif
 \end{equation}
 for all $x, y \in C$, and Gronwall's inequality applies
 \begin{equation}
+    \label{eq:g-ineq}
     \left|\varphi^t(x) - \varphi^t(y)\right| = e^{Lt}\left|x - y\right|
 \end{equation}
 for all $x, y \in C$. 
 Thus for any closed interval in $A$, the resulting flow is always continuous. 
-That is, for every $q \in Q$ there will alwasy be
+
+To see the consequences of this: let $v(\vb{s}, t)$ be the function giving the $v$ value of the system state vector at any $t$. 
+Then on any arbitrary closed interval $\mathcal{I} = \left[0, T\right]$ we take $\vb{s}_t = \varphi^t(\vb{a})$ for $\vb{a} \in A$. 
+We can define the maximum $v$ for a given trajectory in $\mathcal{I}$
+\begin{equation}
+    V_{m}(\vb{a}) = \max_{t \in \mathcal{I}} \left\{v(\varphi^t(\vb{a}), t)\right\}
+\end{equation}
+
+Considering all possible trajectories in $C$, \ref{eq:g-ineq} applies:
+\begin{equation}
+    \left|V_m(\vb{a}_1) - V_m(\vb{a}_2)\right| = e^{Lt}\left|\vb{a}_1 - \vb{a}_2\right|
+\end{equation}
+for all $\vb{a}_1 \text{, } \vb{a}_2 \in A$, in the arbitrary interval $\mathcal{I}$. 
+
+That is, the maximum voltage of the spike upstroke is always continuous for all stimulation values: no discontinuity in the voltage trace over time exists.
+
+Note that as $t \to \infty$ the exponential could indeed lead to a great distance from $v$ values. 
+However, the maximum of a spike always happens in a finite interval after the stimulation, or it does not. 
