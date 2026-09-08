@@ -52,7 +52,7 @@ then a pseudo-potential energy function is defined as
     \Phi(T) = - \int F(T) \dd T
 \end{equation}
 
-that represents the "energy" needed to change the temperature across temperature values. % this should be explained more clearly
+that represents the \enquote{energy} needed to change the temperature across temperature values. % this should be explained more clearly
 From $\Phi$ we get
 
 \begin{equation}
@@ -67,7 +67,7 @@ Then intuitively the maximum of $\Phi$ will be an unstable point, while the mini
 
 is $<0$, any neighboring starting state of the earth's temperature will converge to it, while when it is $>0$ they will diverge.
 
-It can be shown that $T_1 \text{, } T_3$ are stable points, while $T_2$ is unstable: a peak any starting state would ''roll off'' from (see \ref{app:1}). % add an appendix showing that?
+It can be shown that $T_1 \text{, } T_3$ are stable points, while $T_2$ is unstable: a peak any starting state would \enquote{roll off} from (see \ref{app:1}). % add an appendix showing that?
 In our context, $T_1 \text{, } T_3$ are the only observable climates, temperatures at which the earth will stay for enough time to be detectable in the geological records.
 A system where 2 stable states separated by an unstable state exist is called a bistable system, and the plot of $\Phi$ over $T$ displays the typical double well shape of the (pseudo)potential function (Figure \ref{fig:double well}). % add plot
 
@@ -113,7 +113,7 @@ That is, the system shows temperature oscillations at the forcing frequency, as 
     \label{fig:noisy timeseries}
 \end{figure}
 Note that oscillations arise from the joint effect of the periodic forcing and noise: noise pushes the system away from the equilibrium at every timestep, but only when the forcing asymmetrically tilts the double well potential such that the distance between the current equilibrium and the unstable one becomes small enough to allow the stochastic component to push the system over it, a climate transition (that is, a jump from $T_1$ to $T_3$ or viceversa) can occur. 
-This can be seen as an ''escape'' from a stable equilibrium, requiring a jump over a (pseudo)energy potential ''wall''. This is a classic problem in physics, Kramer's rate \parencite{kramersBrownianMotionField1940} gives the frequency of jumps per second
+This can be seen as an \enquote{escape} from a stable equilibrium, requiring a jump over a (pseudo)energy potential \enquote{wall}. This is a classic problem in physics, Kramer's rate \parencite{kramersBrownianMotionField1940} gives the frequency of jumps per second
 
 \begin{equation}
     r_K = \frac{\sqrt{V''(x_m)/m}\sqrt{\left|V''(x_b)/m\right|}}{2\pi\gamma}e^{-\frac{\Delta V}{D}}
@@ -228,7 +228,7 @@ where $\eta$ is gaussian white noise, and $x(a-bx^2)$ cubic term, that for $a>0$
     &= \frac{b}{4}x^4 - \frac{a}{2}x^2 + C
 \end{align*}
 
-Intuitively, a neuron is a system that displays both quiescent and spiking behavior: that is, 2 stable states, separated by a ''barrier'' commonly called the voltage threshold. 
+Intuitively, a neuron is a system that displays both quiescent and spiking behavior: that is, 2 stable states, separated by a \enquote{barrier} commonly called the voltage threshold. 
 Note that the term threshold is hardly accurate: different current values can all elicit spikes in neurons depending on stimulation duration, some neurons respond to certain stimulation frequencies at currents lower than those needed to elicit a spike with a pulse-like stimulation, and others fire in response to hyperpolarizing currents (known as a rebound spike) \cite[Chapter~7]{izhikevichDynamicalSystemsNeuroscience2006}.
 
 Unsurprisingly, a neuron can be modeled in the same form of \ref{eq:general-doublewell} to show SR \parencite{bulsaraStochasticResonanceSingle1991}. 
@@ -263,7 +263,7 @@ Then the nonlinearity we are interested in is whichever is born from the interac
 
 \subsection{Neuron types and inputs}
 Different $\mathcal{P}$ construct different fields $F$, resulting in different equilibria, both number and type, and bifurcations; all leading to different behaviors. 
-Thus the FHN can model different types of neurons, the main types are known as ''integrators'' (type-1) and ''resonators'' (type-2). 
+Thus the FHN can model different types of neurons, the main types are known as integrators (type-1) and resonators (type-2). 
 The 2 types have different computational properties, but both can rightly be used for primary and secondary sensory neurons (which are of interest in this chapter), depending on the type of stimulus they are supposed to receive and process.
 %In this chapter the application of SR is on stimulus detection. 
 %If our definition of optimal detection is identifying and tracking the quantity of any given input, then a type 1 ''integrator'' neuron is the natural choice. 
@@ -309,8 +309,8 @@ Effectively $I$ is to be thought of as another parameter in $\mathcal{P}$ that w
 As seen in \ref{sec:dyn-sys}, this is the setting for a codimension-1 bifurcation. 
 Then, unlike $\delta$ inputs, smooth ones result in a change in the topology of the phase portrait of the system, changing its overall behavior.
 
-In \ref{sec:classic-SR} we saw that SR happens for an input $\mu(t)$ that was unable by itself to lift the system over the pseudopotential ''wall'' (intuitively no better tracking of $\mu(t)$ could be made otherwise). 
-It is clear that for neurons the ''wall'' is the difference between the spiking and non-spiking state. 
+In \ref{sec:classic-SR} we saw that SR happens for an input $\mu(t)$ that was unable by itself to lift the system over the pseudopotential \enquote{wall} (intuitively no better tracking of $\mu(t)$ could be made otherwise). 
+It is clear that for neurons the \enquote{wall} is the difference between the spiking and non-spiking state. 
 Therefore, it is now necessary to clarify the meaning of threshold. 
 
 \subsection{Neural nonlinearity and threshold phenomena}
@@ -332,7 +332,7 @@ infact, there exist a set of those intermediate trajectories (canards), also cal
 Variable amplitude action potential are also present in biological neurons \cite{clayExcitabilitySquidGiant1998}, but the overwhelming majority of observations points to single threshold values and all-or-none responses. 
 This is due to the thinness of the slow manifold: given the unstability of the middle branch few trajectories follow it for enough time to produce the intermediate response. 
 Indeed, The size of the interval is of order $O(e^{-c/\varepsilon})$, where $c$ is a positive constant and $\varepsilon \ll 1$ is the separation between the fast and slow time scales \cite{guckenheimerNUMERICALCOMPUTATIONCANARDS2000}. 
-Then in the physical world channel noise alone would make it impossible to remain on the slow manifold, that can be regarded in realistic conditions as a ''quasi-threshold'' or a threshold manifold \cite{fitzhughMathematicalModelsThreshold1955}. 
+Then in the physical world channel noise alone would make it impossible to remain on the slow manifold, that can be regarded in realistic conditions as a \enquote{quasi-threshold} or a threshold manifold \cite{fitzhughMathematicalModelsThreshold1955}. 
 
 Monostable models are usually near an Hopf bifurcation, hence resonators. 
 Integrators are instead modeled by systems near saddle-node bifurcations, then at least a node and a saddle must exist in the state space. 
@@ -345,7 +345,7 @@ For non $\delta$ stimulation the threshold may be viewed as the critical value o
 Usually in FHN and similar models this leads to a continued spiking state, with frequency dependent on the input for saddle-node and a roughly stable instrinsic frequency in hopf bifurcations. 
 
 Various models and (quasi)threshold phenomena have been described, returning to the arguments in \ref{sec:classic-SR}, it is clear that nonlinear elements in neurons create different types of nonlinearity in responses. 
-However, once biological parameter ranges are taken into consideration, the difference between a spike and a non-spike response is what constitues our ''wall'' to be crossed. 
+However, once biological parameter ranges are taken into consideration, the difference between a spike and a non-spike response is what constitues our \enquote{wall} to be crossed. 
 
 Note that the different dynamical properties of the models have an important role in the neurocomputational characteristics of neurons, but, for the purpose of studying SR for recovery of an external input, that simple concept is all we need. 
 Indeed, SR is found in different dynamical configurations of the FHN \cite{longtinStochasticResonanceNeuron1993a,peiDetectionThresholdNoise1995,makarovSpikingBehaviorNoiseDriven2001}. 

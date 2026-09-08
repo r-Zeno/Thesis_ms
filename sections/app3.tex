@@ -47,11 +47,11 @@ for all $x, y \in C$, and Gronwall's inequality applies
 for all $x, y \in C$. 
 Thus for any closed interval in $A$, the resulting flow is always continuous. 
 
-To see the consequences of this: let $v(\vb{s}, t)$ be the function giving the $v$ value of the system state vector at any $t$. 
+To see the consequences of this: let $v(\vb{s})$ be the function giving the $v$ value of the system state vector at any $t$. 
 Then on any arbitrary closed interval $\mathcal{I} = \left[0, T\right]$ we take $\vb{s}_t = \varphi^t(\vb{a})$ for $\vb{a} \in A$. 
 We can define the maximum $v$ for a given trajectory in $\mathcal{I}$
 \begin{equation}
-    V_{m}(\vb{a}) = \max_{t \in \mathcal{I}} \left\{v(\varphi^t(\vb{a}), t)\right\}
+    V_{m}(\vb{a}) = \max_{t \in \mathcal{I}} \left\{v(\varphi^t(\vb{a}))\right\}
 \end{equation}
 
 Considering all possible trajectories in $C$, \ref{eq:g-ineq} applies:
