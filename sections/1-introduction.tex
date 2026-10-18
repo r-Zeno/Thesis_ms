@@ -183,9 +183,9 @@ Then we use the linearization of the system near the equilibria, solving
         \tilde{u}
     \end{pmatrix}
 \end{equation}
-note that in the linearization of the system quadratic and higher orders terms are omitted since they are evaluated on the small disturbance $\tilde{\vb{s}}$, and so are assumed to contribute extremely little to the solution.
+note that in the linearization of the system quadratic and higher orders terms are omitted since they are evaluated on the small disturbance $\tilde{\vb{s}}$, and so are assumed to contribute little to the solution.
 
-To solve the system above we can use the eigenvalue method (if the eigenvectors are linearly independent) where solutions are in the form $\tilde{\vb{s}}(t) = e^{\lambda t}\vb{\xi}$, where $\vb{\xi}$ is the eigenvector. 
+To solve the system above we can use the eigenvalue method, solutions are in the form $\tilde{\vb{s}}(t) = e^{\lambda t}\vb{\xi}$, where $\vb{\xi}$ is the eigenvector. 
 substituting into \ref{eq:lin-sys} we get
 \begin{equation}
     \label{eq:sol-to-linsys}
@@ -232,7 +232,7 @@ Intuitively, a neuron is a system that displays both quiescent and spiking behav
 Note that the term threshold is hardly accurate: different current values can all elicit spikes in neurons depending on stimulation duration, some neurons respond to certain stimulation frequencies at currents lower than those needed to elicit a spike with a pulse-like stimulation, and others fire in response to hyperpolarizing currents (known as a rebound spike) \cite[Chapter~7]{izhikevichDynamicalSystemsNeuroscience2006}.
 
 Unsurprisingly, a neuron can be modeled in the same form of \ref{eq:general-doublewell} to show SR \parencite{bulsaraStochasticResonanceSingle1991}. 
-Interestingly, the same holds in more accurate neuron models.
+Interestingly, the same holds for more accurate neuron models.
 
 \subsection{The FitzHugh-Nagumo model}
 \label{sec:fhn}
@@ -307,18 +307,19 @@ Rather, when the changes in $I$ are slow enough, the geometry of the phase portr
 Effectively $I$ is to be thought of as another parameter in $\mathcal{P}$ that we choose to vary.
 
 As seen in \ref{sec:dyn-sys}, this is the setting for a codimension-1 bifurcation. 
-Then, unlike $\delta$ inputs, smooth ones result in a change in the topology of the phase portrait of the system, changing its overall behavior.
+Then, unlike $\delta$ inputs, smooth ones result in a change in the geometry of the phase portrait of the system, changing its overall behavior.
 
 In \ref{sec:classic-SR} we saw that SR happens for an input $\mu(t)$ that was unable by itself to lift the system over the pseudopotential \enquote{wall} (intuitively no better tracking of $\mu(t)$ could be made otherwise). 
 It is clear that for neurons the \enquote{wall} is the difference between the spiking and non-spiking state. 
 Therefore, it is now necessary to clarify the meaning of threshold. 
 
 \subsection{Neural nonlinearity and threshold phenomena}
+\label{sec:neural nonlin and th}
 The usual working definition of a threshold is a membrane voltage value $v_{\vartheta}$ that when reached is followed by a large excursion in $v$, while no excursion is present for $v < v_{\vartheta}$. 
 The discontinuity in the trajectories of $v$ near $v_{\vartheta}$ is our wall to be crossed. 
 However, looking at the vector fields depicted in the phase portraits, it is unclear whether there really is such a threshold value.
 
-Indeed, consider the FHN in its simplest configuration: having a unique globally attracting stable equilibrium, this means that any excitation of the system will eventually converge to it. 
+Indeed, consider the FHN in its simplest configuration: having a unique globally attracting stable equilibrium, meaning that any excitation of the system will eventually converge to it. 
 This mirrors our understanding of a neuron with a preferred resting state that after stimulation relaxes back to it.
 
 The FHN system so defined does not have any discontinuity in its vector flow, no all-or-none response can arise theoretically (see \ref{app:quasi-threshold} for an argument). 
@@ -327,36 +328,153 @@ The phase portrait is divided by the $w/v$-nullclines in 4 regions, depending on
 In the former case $\vb{s}$ will quickly return to $\vb{s}_0$, while in the latter it will go quickly to the right of the unstable middle branch of the $v$-nullclines and cross it after its right knee, then coming back to $\vb{s}_0$ as $\dot{v}<0$. 
 
 However, for the right stimulation, the system may also travel along the middle branch of $v$-nullcline up to the right knee before jumping to a stable branch. 
-infact, there exist a set of those intermediate trajectories (canards), also called the slow manifold, as at the $v$-nullcline $\dot{v} = 0$, and the dynamics are governed by the slow $w$ variable. 
+in fact, there exist a set of those intermediate trajectories (canards), that trace along the slow manifold: the $v$-nullcline where $\dot{v} = 0$, and the dynamics are governed by the slow $w$ variable. 
 
 Variable amplitude action potential are also present in biological neurons \cite{clayExcitabilitySquidGiant1998}, but the overwhelming majority of observations points to single threshold values and all-or-none responses. 
-This is due to the thinness of the slow manifold: given the unstability of the middle branch few trajectories follow it for enough time to produce the intermediate response. 
+This is due to the thinness of the set of canards: given the instability of the middle branch few trajectories follow it for enough time to produce the intermediate response. 
 Indeed, The size of the interval is of order $O(e^{-c/\varepsilon})$, where $c$ is a positive constant and $\varepsilon \ll 1$ is the separation between the fast and slow time scales \cite{guckenheimerNUMERICALCOMPUTATIONCANARDS2000}. 
 Then in the physical world channel noise alone would make it impossible to remain on the slow manifold, that can be regarded in realistic conditions as a \enquote{quasi-threshold} or a threshold manifold \cite{fitzhughMathematicalModelsThreshold1955}. 
 
 Monostable models are usually near an Hopf bifurcation, hence resonators. 
 Integrators are instead modeled by systems near saddle-node bifurcations, then at least a node and a saddle must exist in the state space. 
-Assuming a $\delta$ input that shifts the state vector $\vb{s}$ from the stable node (again, the resting state), if $Q$ moves $\vb{s}$ to the left of the stable branch of the saddle point, $\vb{s}$ trajectory is first dominated by the negative eigenvalue, then by then positive, being repelled back to the node. 
+Assuming a $\delta$ input that shifts the state vector $\vb{s}$ from the stable node (again, the resting state), if $Q$ moves $\vb{s}$ to the left of the stable branch of the saddle point, $\vb{s}$ trajectory is first dominated by the negative eigenvalue, then by the positive, being repelled back to the node. 
 That is, no large excursion happens. 
 When $Q$ is large enough to move $\vb{s}$ to the right of the stable branch, the system follows again the eigenvector with the negative eigenvalue, but is then repelled to the right, resulting in a large excursion in $v$ (see Fig [saddle-node fig]). 
 Therefore in integrators there exist a real discontinuity: the stable branch of the saddle, called the separatrix, represents a set of thresholds \cite{mitryExcitableNeuronsFiring2013}. 
 
 For non $\delta$ stimulation the threshold may be viewed as the critical value of the codim-1 parameter (i.e., the input voltage), whenever it is crossed the system undergoes a bifurcation that changes its behavior. 
-Usually in FHN and similar models this leads to a continued spiking state, with frequency dependent on the input for saddle-node and a roughly stable instrinsic frequency in hopf bifurcations. 
+Usually in FHN and similar models this leads to a continued spiking state, with frequency dependent on the input for saddle-node and a roughly stable intrinsic frequency in hopf bifurcations. 
 
 Various models and (quasi)threshold phenomena have been described, returning to the arguments in \ref{sec:classic-SR}, it is clear that nonlinear elements in neurons create different types of nonlinearity in responses. 
-However, once biological parameter ranges are taken into consideration, the difference between a spike and a non-spike response is what constitues our \enquote{wall} to be crossed. 
+However, once biological parameter ranges are taken into consideration, we may define the general neuronal nonlinearity as the presence of a threshold response. 
 
 Note that the different dynamical properties of the models have an important role in the neurocomputational characteristics of neurons, but, for the purpose of studying SR for recovery of an external input, that simple concept is all we need. 
 Indeed, SR is found in different dynamical configurations of the FHN \cite{longtinStochasticResonanceNeuron1993a,peiDetectionThresholdNoise1995,makarovSpikingBehaviorNoiseDriven2001}. 
 
-This guides us towards a useful generalization, that will be made evident when considering the setting of application of SR in neural systems.
+%This guides us towards a useful generalization, that will be made evident when considering the setting of application of SR in neural systems.
 
-\subsection{Role of SR in sensory processing}
+%%%% here SR for a single threshold element? (essentially from I = 0 to a binary channel wiht I = 1
+\subsection{Information in threshold elements}
+Considering a threshold as the nonlinearity needed for SR to arise simplifies the analysis. 
+We start with the simplest possible threshold unit, with response y(x(t)), function of time dependent input x(t) such that 
+\begin{equation}
+\label{eq:single th unit}
+    y(x(t)) = 
+    \begin{cases}
+        1 &\text{ if } x(t) \geq \theta\\
+        0 &\text{ if } x(t)  < \theta
+    \end{cases}
+\end{equation}
+if $\max_{t \in \mathbb{R}}x(t) < \theta$ or $\min_{t\in \mathbb{R}}x(t) \geq \theta$ then intuitively we can see that no information on the stimulus can be transmitted by $y(x(t))$. 
+
+We can find an helpful formalization of this notion in information theory, where the analysis of the element in \ref{eq:single th unit} is a classic result, see cit[elements of info theory].
+
+Considering any random variable $X$ with probability mass function $p(x)$ and support $\mathcal{X}$, the uncertainty we have by observing samplings of $X$ is called entropy, defined as
+\begin{equation}
+    H(X) = - \sum_{x \in \mathcal{X}} p(x)\log p(x)
+\end{equation}
+note that herein we take $\log = \log_2$, expressing the quantity in bits, and we take $0\log 0 = 0$.
+
+Assuming we have another random variable $Y$, related in some way to $X$, the remaining average uncertainty on $X$ given $Y$ is the conditional entropy
+\begin{align}
+    H(X|Y) &= \sum_{y \in Y} p(y) H(X|Y=y)\\
+    &= -\sum_{y \in \mathcal{Y}}p(y)\sum_{x \in \mathcal{X}} p(x|y) \log p(x|y)\\
+    &= -\sum_{x \in \mathcal{X}} \sum_{y \in \mathcal{Y}} p(x,y) \log p(x|y)
+\end{align}
+
+Especially useful for the treatment of SR is the Mutual Information (MI) between two random variables. 
+Considering discrete $X,Y$ the MI between them can be understood as the reduction in uncertainty on $X$, knowing $Y$, or vice versa, due to the symmetric relationship of the marginal and joint distributions. % motivate this better, but always in a line
+\begin{align}
+    I(X;Y) &= H(X) - H(X|Y)\\
+    &= -\sum_{x\in \mathcal{X}}p(x) \log p(x) -\left(-\sum_{x \in \mathcal{X}} \sum_{y \in \mathcal{Y}} p(x,y) \log p(x|y)\right)
+\end{align}
+A consequence is that the MI between any variable $X$ and itself is equal to $H(X)$, as $H(X|X) = 0$, so we can see entropy as a sort of self-information.
+
+Then with \ref{eq:single th unit} we can construct the probability mass distribution of our outputs $Y$. 
+For a strictly supra or sub -threshold stimulus we trivially see that taking $\mathcal{Y} = \left\{0,1\right\}$ we get a concentrated probability mass either at $P(Y=1)=1$ or $P(Y=0)=1$, respectively. 
+Then the self-information of our output, regardless of the input, is always 0, as
+\begin{align}
+    H(Y) &= -\left(P(0)\log P(0)+P(1)\log P(1)\right)\\
+    &=- \left(1\log 1 + 0\log 0\right) \text{ or } - \left(0\log0 + 1\log 1\right)
+\end{align}
+
+Instead, if we assume the distribution of the signal $X$ to be gaussian with $\mathbb{E}[X] = \theta$, we know that $P(X \geq \theta) = 0.5$, then $P(X <\theta) = 1 - P(X \geq \theta)$, that gives $P(Y = 1) = 0.5$, then $P(Y = 0) = 1 - P(Y = 1)$. 
+So finding the self-information of the output
+\begin{equation}
+    H(Y) = -\left(\frac{1}{2}\log\frac{1}{2} + \frac{1}{2}\log\frac{1}{2}\right) = 1
+\end{equation}
+note that 1 bit is hence the upper bound of the information an element of the form \ref{eq:single th unit} (called a binary channel) can transmit about any stimulus. 
+
+This holds in a deterministic system, as $H(Y|X) = 0$ gives $I(Y;X) = H(Y) - 0$. 
+However, if noise is added to the element, meaning that an output that would be 1 can change to 0 and vice versa with probability $p'$, then $H(Y|X)$ becomes nonzero, depending entirely on the noise entropy
+\begin{equation}
+    H(p') = -\left(p'\log p' +(1-p')\log (1-p')\right) \text{.}
+\end{equation}
+To show this, it is convenient to map the continuous input $X$ to the discrete $X'$, via the indicator function
+\begin{equation}
+    X' = \mathbb{I}\left(X\geq \theta\right)
+\end{equation}
+resulting in $X'$ having a discrete support $\mathcal{X'}=\left\{0,1\right\}$, with the probabilities $P(X'=1)=P(X\geq \theta) = P(X'=0)=P(X<\theta)=1/2$.
+The conditional entropy of the output given the input becomes
+\begin{align*} % break the long line
+    H(Y|X') &= \sum_{x'\in \mathcal{X'}} p(x') H(Y|X'=x')\\
+    &= -\sum_{x' \in \mathcal{X'}} p(x')\left(P\left(Y=1|x'\right)\log P(Y=1|x') + P\left(Y=0|x'\right)\log P\left(Y=0|x'\right)\right)\\
+    &= -\left[P(X'=1)\left(P\left(Y=1|1\right)\log P(Y=1|1) + P\left(Y=0|1\right)\log P\left(Y=0|1\right)\right)\right.\\ 
+    &\quad\left.P\left(X'=0\right)\left(P\left(Y=0|0\right)\log + P\left(Y=0|0\right)+P\left(Y=1|0\right)\log P(Y=1|0)\right)\right]\\
+    &= -\frac{1}{2}\left[2\left((1-p')\log (1-p') + p'\log p'\right)\right]\\
+    &= -\frac{1}{2}\left[2\left(-H(p')\right)\right] = H(p')
+\end{align*}
+resulting in the MI
+\begin{equation}
+    I(Y;X') = H(Y) - H(p')
+\end{equation}
+Thus noise can only lower the amount of information in a binary channel, when the stimulus is optimal.
+
+%In the case of a totally subthreshold $X$, if gaussian white noise is added to the element, as
+%\begin{equation}
+%\label{eq:single th unit}
+%    y(x(t)) = 
+%    \begin{cases}
+%        1 &\text{ if } x(t) + \sigma\eta(t) \geq \theta\\
+%        0 &\text{ if } x(t) + \sigma\eta(t) < \theta
+%    \end{cases}
+%\end{equation}
+%then the noisy output will be %show that it can better the output if only subth
+%%%% then SR in networks of threshold elements (stocks) -> networks of neurons (the averaging + mixed thresholds by noise not needed for "slow" signal, but needed for "fast" signal)
+\subsection{SR in networks of threshold elements}
+The simplicity of the single element allows to explore an ensemble of threshold elements. 
+Considering $N$ elements in the form of \ref{eq:single th unit}, the output of the network can be defined by a simple sum
+\begin{equation}
+    y_N(x(t)) = \sum_{n=1}^{N} y_n(x(t))
+\end{equation}
+In such a network \textcite{stocksSuprathresholdStochasticResonance2000, stocksInformationTransmissionParallel2001}, showed that SR can occur. 
+Specifically, the phenomenon was called Suprathreshold Stochastic resonance (SSR), since the MI between input and output was increased at the optimal input distribution.
+
+Independent gaussian white noise $\eta_i$ of variance $\sigma^2$ is added to each element in \ref{eq:single th unit}, so that the individual output for the $i=1,\dots,N$ elements becomes
+\begin{equation}
+    y_i(x_i(t)) = 
+    \begin{cases}
+        1 &\text{ if } x_i(t) + \sigma\eta_i(t) \geq \theta_i\\
+        0 &\text{ otherwise}
+    \end{cases}
+\end{equation}
+while the stimulus is gaussian with $\mathbb{E}[X] = \theta$. 
+With $\sigma =0$, all elements behave the same, and no information gain can happen.
+
+However, nonzero noise added to the element is mathematically equivalent to independent variations of each $\theta_i$, thus the number of activated elements at each $t$ can be different than $N$. 
+That is, 
+
+Their appeal to the study of SR in neuroscience comes from the fact that they may serve as a starting approximation of a network of neurons. 
+Indeed, if mapping the 1 output of the threshold element to the spike event, it would seem that it is a good approximation: neurons integrate incoming signals and spike when $v\geq v_{\theta}$, and a possible readout of their activity is a spike count.
+
+However, in the time view of the resulting network, for each time point where $x(t)\geq \theta$ the single element would output a spike, with no way to differentiate changes in the supra-threshold stimulus. 
+As seen in \ref{sec:neural nonlin and th}, the dynamics that lead neurons to have an effective threshold also make it so that integrator neurons respond roughly linearly to stimulus intensity changes above their threshold, which is a desirable property of any sensing system.
+
+
+\subsection{SR in sensory processing}
 In the climate model noise allowed the periodic changes of total incoming solar radiation that were too weak to move the earth systems temperatures alone, to influence it. 
-This problem naturally maps to signal detection in neural systems: a signal too weak to be detected could be, with the right noise level. 
 
-
+Having generalized the needed nonlinearity to the notion of threshold, we see the possible role of SR in neural function: to allow for the detection of a signal too weak to be detected otherwise.
 
 % In turn those lead to different spiking behaviors, in fig (3 examples of FHN pp and response to stim) 3 common topological configurations of the FHN neuron are shown. 
 
