@@ -11,29 +11,24 @@ It is then to be expected that neural systems would have evolved to tolerate or,
 
 \subsection{Classical stochastic resonance}
 \label{sec:classic-SR}
-The idea of studying the effects of noise on the dynamics of a system first appeared parallely in the work of \textcite{benziStochasticResonanceClimatic1982} and \textcite{nicolisStochasticAspectsClimatic1982}, where the term Stochastic Resonance (SR) was used to explain the periodic behavior of earth's average temperature. 
+The idea of studying the effects of noise on the dynamics of a system first appeared parallely in the work of \textcite{benziMechanismStochasticResonance1981} and \textcite{nicolisStochasticAspectsClimatic1982}, where the term Stochastic Resonance (SR) was used to explain the periodic behavior of earth's average temperature. 
 
 A brief covering of that first SR application will be made, as it provides a practical understanding of the general phenomenon and a surprising link to neural systems.
 
 The most common way to model temperature averages was using simple energy balance deterministic models:
-
 \begin{equation}
     \label{eq:temp model}
     C\odv{T}{t} = R_{in}(T) - R_{out}(T)
 \end{equation}
-
 where $C$ is the earth's thermal capacity, and $R_{in}$ and $R_{out}$ represent the total incoming and outgoing solar radiation, defined as
-
 \begin{align*}
     &R_{in} = Q\mu \\
     &R_{out} = \alpha(T)Q\mu + \varepsilon(T)
 \end{align*}
-
 where $\mu$ is the average incoming solar radiation.
 
 In \cite{benziStochasticResonanceClimatic1982} a simplification is used: 3 steady-states are assumed to exist as $T_1 < T_2 < T_3$, those are possible earth's climates.
 \ref{eq:temp model} then becomes
-
 \begin{equation}
     \label{eq:full clim sys}
     C\odv{T}{t} = \frac{\mu\varepsilon(T)}{1 + \beta \left( 1 - T/T_1 \right) \left( 1 - T/T_2 \right) \left( 1 - T/T_3 \right)} -\varepsilon (T)
@@ -41,12 +36,10 @@ In \cite{benziStochasticResonanceClimatic1982} a simplification is used: 3 stead
 %should be explained better
 
 To analyze the stability of the defined climates the rate of change of temperatures is taken as
-
 \begin{equation}
     F(T) = \odv{T}{t} \text{ , }
 \end{equation}
 then a pseudo-potential energy function is defined as
-
 \begin{equation}
     \label{eq:pseudopot}
     \Phi(T) = - \int F(T) \dd T
@@ -54,13 +47,11 @@ then a pseudo-potential energy function is defined as
 
 that represents the \enquote{energy} needed to change the temperature across temperature values. % this should be explained more clearly
 From $\Phi$ we get
-
 \begin{equation}
     F(T) = - \pdv{\Phi}{T}
 \end{equation}
 
 Then intuitively the maximum of $\Phi$ will be an unstable point, while the minima will be stable. That is, where the second derivative with respect to temperature
-
 \begin{equation}
     \odv{F}{T} = - \pdv[2]{\Phi}{T}
 \end{equation}
@@ -90,7 +81,6 @@ Then it would follow $F(T)$ towards $T_1$ or $T_3$ (Figure \ref{fig:det trajs}).
 
 A weak cosinusoidal forcing modulating the input solar radiations can be introduced, representing the varying distance of the earth from the sun along its elliptic orbit. 
 Then $\mu$ becomes time dependent
-
 \begin{equation}
     \mu(t) = 1 + \gamma \cos(\omega t)
 \end{equation}
@@ -100,7 +90,6 @@ The derivative and pseudo-energy function become time dependent $\tilde{F} = \ti
 Still, this periodicity alone does not lead to any change in climates: the system never jumps over $T_2$ (see fig). % add phase plane or use 
 
 If gaussian white noise, representing various mechanisms causing $T$ fluctuations at a smaller time scale, is added to the system, yielding
-
 \begin{equation}
     \odv{T}{t} = \tilde{F}(T;t) + \sigma \eta(t)
 \end{equation}
@@ -114,7 +103,6 @@ That is, the system shows temperature oscillations at the forcing frequency, as 
 \end{figure}
 Note that oscillations arise from the joint effect of the periodic forcing and noise: noise pushes the system away from the equilibrium at every timestep, but only when the forcing asymmetrically tilts the double well potential such that the distance between the current equilibrium and the unstable one becomes small enough to allow the stochastic component to push the system over it, a climate transition (that is, a jump from $T_1$ to $T_3$ or viceversa) can occur. 
 This can be seen as an \enquote{escape} from a stable equilibrium, requiring a jump over a (pseudo)energy potential \enquote{wall}. This is a classic problem in physics, Kramer's rate \parencite{kramersBrownianMotionField1940} gives the frequency of jumps per second
-
 \begin{equation}
     r_K = \frac{\sqrt{V''(x_m)/m}\sqrt{\left|V''(x_b)/m\right|}}{2\pi\gamma}e^{-\frac{\Delta V}{D}}
 \end{equation}
@@ -138,7 +126,7 @@ For classic SR models, the natural measure is the spectral power (obtained by Fo
 \label{sec:dyn-sys}
 It will be shown that neurons are better modeled by 2D systems, due to the coexistence and interaction of 2 main ionic currents that govern a neuron's state $\left(\mathrm{Na}^+ \text{ and } \mathrm{K}^+\right)$, that determine a depolarization-hyperpolarization feedback loop.
 To analyze a 2+D systems the tools of dynamical systems theory are indispensable. 
-A brief covering of the main methods will follow, as they will be referenced in the following chapters (for a more complete tractation, see \parencite{strogatzNonlinearDynamicsChaos2024}).
+A brief covering of the main methods will follow, as they will be referenced in the following chapters (for a more complete treatment, see \parencite{strogatzNonlinearDynamicsChaos2024}).
 
 For any 2D system defined by
 \begin{align}
@@ -220,9 +208,9 @@ Knowing type and stability of equilibria, joined with knowing $F$, provides info
 Historically the first model used to study SR was that of \ref{eq:full clim sys}, more generally expressed as a stochastic differential equation \parencite{benziMechanismStochasticResonance1981}
 \begin{equation}
     \label{eq:general-doublewell}
-    \odv{x}{t} = x\left(a - bx^2\right) + \mu \gamma \cos(\omega t) + \sigma\eta(t)
+    \odv{x}{t} = x\left(a - bx^2\right) + \mu \gamma \cos(\omega t) + \sigma\xi(t)
 \end{equation}
-where $\eta$ is gaussian white noise, and $x(a-bx^2)$ cubic term, that for $a>0$ has 3 fixed points. When defining the pseudo-potential as in \ref{eq:pseudopot} it gives the quartic polynomial that is the simplest realization of the double potential well (here ignoring forcing and noise component)
+where $\xi$ is gaussian white noise, and $x(a-bx^2)$ cubic term, that for $a>0$ has 3 fixed points. When defining the pseudo-potential as in \ref{eq:pseudopot} it gives the quartic polynomial that is the simplest realization of the double potential well (here ignoring forcing and noise component)
 \begin{align*}
     \Phi &= - \int - bx^3 + ax \\
     &= \frac{b}{4}x^4 - \frac{a}{2}x^2 + C
@@ -234,6 +222,7 @@ Note that the term threshold is hardly accurate: different current values can al
 Unsurprisingly, a neuron can be modeled in the same form of \ref{eq:general-doublewell} to show SR \parencite{bulsaraStochasticResonanceSingle1991}. 
 Interestingly, the same holds for more accurate neuron models.
 
+%%%%%%% start cutting from here! and introduce LIF. logic: need wall -> fhn has wall. what matters is threshold -> we can use even cheaper models = LIF
 \subsection{The FitzHugh-Nagumo model}
 \label{sec:fhn}
 The FitzHugh-Nagumo (FHN) model \parencite{fitzhughImpulsesPhysiologicalStates1961,izhikevichFitzHughNagumoModel2006} is a 2D reduction of the Hodgkin-Huxley (HH) biophysical model \parencite{hodgkinQuantitativeDescriptionMembrane1952}, its attractiveness stems from being able to recreate the spiking behavior of neurons without the 4 differential equations that regulate the HH neuron, allowing for easier analysis of the model using the theory of dynamical systems. 
@@ -253,7 +242,6 @@ To see how the 2 models are related, both can be analyzed with the methods of \r
 In the case of $\varepsilon \to 0$, we can treat $w$ as a constant, then it is clear that the FHN model's phase portrait is topologically equivalent to \ref{eq:general-doublewell} (see fig) for the right $\mathcal{P}$ (see \ref{app:2}).
 % here plots of both 1D systems phase portraits
 
-% work in progress
 However, the FHN 1d reduction does not have a spiking mechanism, and the resulting neuron model would only show 2 resting states at different membrane voltages values $v_1\text{, } v_3$, exactly as in \ref{eq:full clim sys}. 
 Thinking about biological neurons, we would be describing a neuron with a single ionic current with a depolarizing effect, so voltage would only grow, with no recovery feedback. 
 Clearly the 1d model is insufficient. 
@@ -351,9 +339,6 @@ However, once biological parameter ranges are taken into consideration, we may d
 Note that the different dynamical properties of the models have an important role in the neurocomputational characteristics of neurons, but, for the purpose of studying SR for recovery of an external input, that simple concept is all we need. 
 Indeed, SR is found in different dynamical configurations of the FHN \cite{longtinStochasticResonanceNeuron1993a,peiDetectionThresholdNoise1995,makarovSpikingBehaviorNoiseDriven2001}. 
 
-%This guides us towards a useful generalization, that will be made evident when considering the setting of application of SR in neural systems.
-
-%%%% here SR for a single threshold element? (essentially from I = 0 to a binary channel wiht I = 1
 \subsection{Information in threshold elements}
 Considering a threshold as the nonlinearity needed for SR to arise simplifies the analysis. 
 We start with the simplest possible threshold unit, with response y(x(t)), function of time dependent input x(t) such that 
@@ -367,7 +352,7 @@ We start with the simplest possible threshold unit, with response y(x(t)), funct
 \end{equation}
 if $\max_{t \in \mathbb{R}}x(t) < \theta$ or $\min_{t\in \mathbb{R}}x(t) \geq \theta$ then intuitively we can see that no information on the stimulus can be transmitted by $y(x(t))$. 
 
-We can find an helpful formalization of this notion in information theory, where the analysis of the element in \ref{eq:single th unit} is a classic result, see cit[elements of info theory].
+We can find an helpful formalization of this notion in information theory, where the analysis of the element in \ref{eq:single th unit} is a classic result, see \cite{Cover2006}.
 
 Considering any random variable $X$ with probability mass function $p(x)$ and support $\mathcal{X}$, the uncertainty we have by observing samplings of $X$ is called entropy, defined as
 \begin{equation}
@@ -385,6 +370,7 @@ Assuming we have another random variable $Y$, related in some way to $X$, the re
 Especially useful for the treatment of SR is the Mutual Information (MI) between two random variables. 
 Considering discrete $X,Y$ the MI between them can be understood as the reduction in uncertainty on $X$, knowing $Y$, or vice versa, due to the symmetric relationship of the marginal and joint distributions. % motivate this better, but always in a line
 \begin{align}
+    \label{eq:MI}
     I(X;Y) &= H(X) - H(X|Y)\\
     &= -\sum_{x\in \mathcal{X}}p(x) \log p(x) -\left(-\sum_{x \in \mathcal{X}} \sum_{y \in \mathcal{Y}} p(x,y) \log p(x|y)\right)
 \end{align}
@@ -416,7 +402,7 @@ To show this, it is convenient to map the continuous input $X$ to the discrete $
 \end{equation}
 resulting in $X'$ having a discrete support $\mathcal{X'}=\left\{0,1\right\}$, with the probabilities $P(X'=1)=P(X\geq \theta) = P(X'=0)=P(X<\theta)=1/2$.
 The conditional entropy of the output given the input becomes
-\begin{align*} % break the long line
+\begin{align*}
     H(Y|X') &= \sum_{x'\in \mathcal{X'}} p(x') H(Y|X'=x')\\
     &= -\sum_{x' \in \mathcal{X'}} p(x')\left(P\left(Y=1|x'\right)\log P(Y=1|x') + P\left(Y=0|x'\right)\log P\left(Y=0|x'\right)\right)\\
     &= -\left[P(X'=1)\left(P\left(Y=1|1\right)\log P(Y=1|1) + P\left(Y=0|1\right)\log P\left(Y=0|1\right)\right)\right.\\ 
@@ -430,63 +416,106 @@ resulting in the MI
 \end{equation}
 Thus noise can only lower the amount of information in a binary channel, when the stimulus is optimal.
 
-%In the case of a totally subthreshold $X$, if gaussian white noise is added to the element, as
-%\begin{equation}
-%\label{eq:single th unit}
-%    y(x(t)) = 
-%    \begin{cases}
-%        1 &\text{ if } x(t) + \sigma\eta(t) \geq \theta\\
-%        0 &\text{ if } x(t) + \sigma\eta(t) < \theta
-%    \end{cases}
-%\end{equation}
-%then the noisy output will be %show that it can better the output if only subth
-%%%% then SR in networks of threshold elements (stocks) -> networks of neurons (the averaging + mixed thresholds by noise not needed for "slow" signal, but needed for "fast" signal)
 \subsection{SR in networks of threshold elements}
 The simplicity of the single element allows to explore an ensemble of threshold elements. 
 Considering $N$ elements in the form of \ref{eq:single th unit}, the output of the network can be defined by a simple sum
 \begin{equation}
     y_N(x(t)) = \sum_{n=1}^{N} y_n(x(t))
 \end{equation}
-In such a network \textcite{stocksSuprathresholdStochasticResonance2000, stocksInformationTransmissionParallel2001}, showed that SR can occur. 
+In such a network \textcite{stocksSuprathresholdStochasticResonance2000,stocksInformationTransmissionParallel2001}, showed that SR can occur. 
 Specifically, the phenomenon was called Suprathreshold Stochastic resonance (SSR), since the MI between input and output was increased at the optimal input distribution.
 
-Independent gaussian white noise $\eta_i$ of variance $\sigma^2$ is added to each element in \ref{eq:single th unit}, so that the individual output for the $i=1,\dots,N$ elements becomes
+Independent noise $\eta_i$ of variance $\sigma^2$ is added to each element in \ref{eq:single th unit}, so that the individual output for the $i=1,\dots,N$ elements becomes
 \begin{equation}
     y_i(x_i(t)) = 
     \begin{cases}
-        1 &\text{ if } x_i(t) + \sigma\eta_i(t) \geq \theta_i\\
+        1 &\text{ if } x_i(t) + \eta_i(t) \geq \theta_i\\
         0 &\text{ otherwise}
     \end{cases}
 \end{equation}
-while the stimulus is gaussian with $\mathbb{E}[X] = \theta$. 
-With $\sigma =0$, all elements behave the same, and no information gain can happen.
+Note that for future use it is convenient to take standardized (unit variance) noise $\xi$, thus expressing the noise intensity directly by $\sigma$ as its sd: $\eta_i = \sigma\xi_i$.
 
-However, nonzero noise added to the element is mathematically equivalent to independent variations of each $\theta_i$, thus the number of activated elements at each $t$ can be different than $N$. 
-That is, 
+With $\sigma =0$, all elements behave the same, the system collapses to \ref{eq:single th unit} and no information gain can happen.
+However, nonzero noise added to the element is mathematically equivalent to independent variations of each $\theta_i$, thus the number of activated elements at each $t$ can be different than $N$ or 0. 
+That is, the response of the single element with nonzero noise is not a step function of the input. 
+Rather, for each realization of $X=x$, it is influenced by the probability that noise changes the deterministic output: in the case $x\geq\theta$ the probability of the element being active
+\begin{equation}
+    \label{eq:p active}
+    P(1|x) = \int_{\theta - x}^{\infty} p_{\eta}(\eta)d\eta
+\end{equation}
+and for $x<\theta$ the probability of it not being active
+\begin{equation}
+    \label{eq:p not active}
+    P(0|x) = \int_{-\infty}^{\theta - x} p_\eta(\eta)d\eta
+\end{equation}
+If we assume symmetric distribution for both $\eta$ and $X$, then both are equal, and depend only on the distance from threshold $ d= |x-\theta|$. 
 
-Their appeal to the study of SR in neuroscience comes from the fact that they may serve as a starting approximation of a network of neurons. 
-Indeed, if mapping the 1 output of the threshold element to the spike event, it would seem that it is a good approximation: neurons integrate incoming signals and spike when $v\geq v_{\theta}$, and a possible readout of their activity is a spike count.
+Considering the whole network, the active probability can be used to obtain the probability of a given count $n$ given a certain realization of $X$.
+\begin{equation}
+    P(n|x) = P(1|x)^n(1-P(1|x))^{N-n}
+\end{equation}
+since individual crossings at each $d$ are dependent only on the individual independent noise, we care about the count, so we consider all possible combination of the $N$ that give a count $n$: the binomial
+\begin{equation}
+    P(n|x) = \binom{N}{n}P(1|x)^n(1-P(1|x))^{N-n} \text{.}
+\end{equation}
 
-However, in the time view of the resulting network, for each time point where $x(t)\geq \theta$ the single element would output a spike, with no way to differentiate changes in the supra-threshold stimulus. 
-As seen in \ref{sec:neural nonlin and th}, the dynamics that lead neurons to have an effective threshold also make it so that integrator neurons respond roughly linearly to stimulus intensity changes above their threshold, which is a desirable property of any sensing system.
+Averaging across $X$ we get the overall probability of having an individual $n$ count response, and of all possible combination giving $n$ counts, respectively
+\begin{align}
+    &\mathbb{E}[\vb{y}|X] = \int_{-\infty}^{\infty} dxp_X(x) P(1|x)^n(1-P(1|x))^{N-n} = P'(n)\\
+    &\mathbb{E}[Y_n|X] = \int_{-\infty}^{\infty} dx p_X(x) \binom{N}{n} P(1|x)^n(1-P(1|x))^{N-n} = P(n)
+\end{align}
 
+Substituting into \ref{eq:MI} (with $X$ continuous) we get
+\begin{align}
+    \label{eq:closed form I}
+    &I(Y;X)\\
+    &= - \sum_{n=0}^N P(n) \log P'(n) -\left\{- N \int_{-\infty}^{\infty} dx p_X(x)\left[ P(1|x) \log P(1|x) + P(0|x)\log P(0|x)\right]\right\}
+\end{align}
+Assuming that $p_\eta(\eta)$ and $p_X(x)$ are equal except for their first moment, and that $\mathbb{E}[X] = \theta$, we get the approximated closed form solution (see \ref{app:MI in net})
+\begin{equation}
+    I(Y;X)= \frac{1}{2}\log(N+1)-\frac{1}{2\log_e 2} + O(1/N)
+\end{equation}
+That shows how $I$ grows with $N$. 
+Additionally, since the case $\sigma=0$ yields $P(n) = 0$ for all counts $n\neq N,0$, as seen previously the network's $I$ is capped at 1 bit. 
+Then it is evident that for high enough $N$, for a given $\sigma \neq0$, we will have $I>1$ bit. 
+For $\sigma \to \infty$, the individual outputs are completely dependent on noise, hence $H(Y) = H(Y|X)$ and $I(Y;X) = 0$.
 
-\subsection{SR in sensory processing}
+In this sense we are sure that there must exist an optimal value of $\sigma$ for which $I(Y|X)$ is maximized, that will depend on both noise and stimulus distributions.
+
+Specifically, noise influences both the summation and integral of the RHS of \ref{eq:closed form I}, without specifying $p_\eta(\eta),p_X(x)$, and the optimal $\sigma$ value will be such that
+
+Another view on the mechanism of SR in the network is that noise effectively makes the step-like response function of the single element a graded function of the stimulus, within a certain window (see \ref{eq:p active},\ref{eq:p not active}). 
+When considering the output of a single element, which is still binary, the linearized response cannot be sampled accurately, but when considering the sum of $N>1$ elements, it is possible to get a discrete approximation. %could word this better and maybe show it?
+
+\subsection{Real neurons and MI}
+The appeal of the summing network approach to the study of SR in neuroscience comes from the fact that it may serve as a starting approximation of a network of neurons. 
+Indeed, if mapping the 1 output of the threshold element to the spike event, it would seem that it is a good approximation: neurons integrate incoming signals and spike when $v_m\geq v_{\theta}$, and a possible readout of their activity is the spike count.
+
+However, the information gain on the negative $d$ between threshold and stimulus happens only because in the noiseless element the only output is 1 at any time $t$ (and as already seen, the noiseless network collapses to the single element output). 
+While also a neuron has a single output state, in neural function its output is usually meaningless if not integrated by a receiving neuron. 
+A spike is received as a graded change in membrane voltage, that decays exponentially in time and space. 
+Given that in most neurons a received spike is not enough to make $v_m\geq v_{\theta}$, then in the simplified case of two neurons in an input-output relationship, what allows for transmission of information is the rate of the spiking events from the input, that will be translated in an output rate. 
+
+The discrete spike events are thus mapped to a continuous firing rate defined within an arbitrary window, chosen such that it is relevant to the biological integration time constant. 
+Neurons commonly found in sensory systems are integrators, as seen in \ref{sec:neural nonlin and th} the underlying dynamics of integrators are such that they respond approximately linearly to the total incoming input, when above rheobase. 
+As will be shown, this makes the definition of SSR for threshold elements misleading in more biologically accurate models. 
+
+Still, the framework developed for simple threshold elements is useful as it gives a precise measure of \enquote{performance} that does not rely on periodicity of the signal as the SNR. 
+Indeed, removing assumption on the type of signal, information theoretic measures allow for a more general characterization of the phenomenon, more so when studying biological neural networks, where the possible input distributions cannot be easily assumed.
+
+\subsection{SR in biological models}
 In the climate model noise allowed the periodic changes of total incoming solar radiation that were too weak to move the earth systems temperatures alone, to influence it. 
 
-Having generalized the needed nonlinearity to the notion of threshold, we see the possible role of SR in neural function: to allow for the detection of a signal too weak to be detected otherwise.
+Having generalized the needed nonlinearity to the notion of threshold, we see the possible role of SR in neural function: to allow for the detection of a signal too weak to be detected otherwise. 
+Clearly, this problem is primarily present in sensory systems. 
+Indeed, SR in sensory tasks was found in various animal models \cite{douglassNoiseEnhancementInformation1993,collinsNoiseenhancedInformationTransmission1996,levinBroadbandNeuralEncoding1996,curcioDoubleStochasticResonance2025,nodaStochasticResonanceSparse2024}. 
+However, experimental approaches do not manipulate internal noise in the animal neurons, nor can they easily test a range of $p_X(x),p_\eta(\eta)$. 
+Though it can be argued that for the single neuron case adding noise to the stimulus is mathematically equal to noise in the neuron, this and the fact that it is difficult to precisely record a large network of neurons limit the experimental studies to single neuron or behavioral effects. 
+Conversely, most theoretical and simulation studies focus on simple networks that are not directly comparable to biological systems, especially with many details of SR depending on parameter choices that are hard to relate to their biological counterparts.
 
-% In turn those lead to different spiking behaviors, in fig (3 examples of FHN pp and response to stim) 3 common topological configurations of the FHN neuron are shown. 
+A middle ground can be found in insect models: their relative simplicity allows for precise mapping of sensory networks, and experimental manipulation and neuronal recording of large population level activity can be more easily performed, see . 
+At the same time, once the network is isolated, it can be analyzed within a precise theoretical framework, and simulated where the purely theoretical approach would be intractable. % too colloquial?
 
-
-% this better later
-% Aside from the closeness to neurobiology (that will be shown to be not so important), the majority of known neural computation strategies require a nonlinear element, this is how 
-
-
-
-% just placeholder to understand the trajectory to be followed
-% Then, in a "sensing system" sense, the (relatively) weak $\xi$ helped to recover the weak forcing frequency $\omega$, which would have not been detected otherwise. 
-% In this sense noise may be seen as beneficial in signal processing, neurons of the first part of the sensory systems are particularly noisy signal processors.
-% Intuitively, the conditions seen until now ought not be so strict: what a system needs to display SR could be simply having a stable state that is separated by some nonlinearity from another state (that in turn needs not be stable). 
-% This is a good description of a neuron.
-
+Here, a model of the Honeybee Antennal Lobe (AL), primary center for olfaction, is studied for its suitability for SR, from the single neuron to the whole network level. 
+An advantage of studying olfactory networks is the remarkable similarity in the sensory architecture among mammals and insect \cite{galiziaParallelOlfactorySystems2010,acheOlfactionDiverseSpecies2005,suOlfactoryPerceptionReceptors2009,kauppOlfactorySignallingVertebrates2010}. 
+This allows for useful generalization, while also having a biological reference for parameters.

@@ -16,6 +16,8 @@
 \usepackage[backend={biber}, style=phys, doi=true]{biblatex}
 \usepackage{csquotes}
 
+% sometimes keys have a note section that gets added to bibliography otherwise
+\AtEveryBibitem{\clearfield{note}}
 \addbibresource{references.bib}
 
 \graphicspath{{graphics/}}

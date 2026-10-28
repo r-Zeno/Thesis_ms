@@ -1,0 +1,37 @@
+\chapter{MI in the parallel threshold network}
+\label{app:MI in net}
+To arrive at the large $N$ MI derivation in \cite{stocksInformationTransmissionParallel2001} we consider the output
+\begin{equation}
+    Y(t) = \sum_{n=1}^{N} y_n(x(t))
+\end{equation}
+where the single element output is given by
+\begin{equation}
+    y_n(x(t)) = 
+    \begin{cases}
+        1,\quad \text{if } x(t) +\eta_n(t)\geq \theta\\
+        0,\quad \text{otherwise}
+    \end{cases}
+\end{equation}
+assuming that each $y_n(x(t))$ depend on stationary processes, we can ignore the time dependence and model the input as the random variable $X\sim (\mu_x,\sigma^2_x)$ and the independent identically distributed element noise as $\eta_n \sim(\mu_\eta, \sigma^2_\eta)$. 
+
+The formula for the MI between the continuous $X$ and the discrete response count $Y$ is
+\begin{align}
+    I(Y;X) &= H(Y) - H(Y|X)\\
+    &=-\sum_{n=0}^N p_Y(n)\log p_Y(n) - \left( -\int_{-\infty}^{\infty}p_X(x)dx\sum_{n=0}^N P(n|x)\log P(n|x)  \right) 
+\end{align}
+where the probability of each count $n$ given a realization of $x$ is given by the binomial
+\begin{equation}
+    \label{eq:app-bin count}
+    P(n|x) = \binom{N}{n} P(1|x)^n (1-P(1|x))^{N-n}
+\end{equation}
+with the otherwise deterministic output being a probability dependent on both noise and the distance of the signal from $\theta$
+\begin{equation}
+    P(1|x) = \int_{\theta - x}^\infty p_\eta(\eta)d\eta
+\end{equation}
+that is, the probability that $\eta+x\geq\theta$.
+
+Substituting \ref{eq:app-bin count} the conditional probability of the count term expands to
+\begin{align}
+    &\sum_{n=0}^N P(n\vert x)\log P(n\vert x)=\sum_{n=0}^N P(n\vert x)\log\left( \binom{N}{n} P(1\vert x)^n(1 - P(1\vert x))^{N-n}\right)\\ 
+    &=\sum_{n=0}^N P(n\vert x) \log \binom{N}{n} + N\log\sum_{n=0}^N P(n\vert x) + (N-n)\log \sum_{n=0}^N P(nx)
+\end{align}
