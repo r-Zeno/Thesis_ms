@@ -30,8 +30,49 @@ with the otherwise deterministic output being a probability dependent on both no
 \end{equation}
 that is, the probability that $\eta+x\geq\theta$.
 
-Substituting \ref{eq:app-bin count} the conditional probability of the count term expands to
+Substituting \ref{eq:app-bin count} the negative of conditional entropy given $x$ expands to
 \begin{align}
     &\sum_{n=0}^N P(n\vert x)\log P(n\vert x)=\sum_{n=0}^N P(n\vert x)\log\left( \binom{N}{n} P(1\vert x)^n(1 - P(1\vert x))^{N-n}\right)\\ 
-    &=\sum_{n=0}^N P(n\vert x) \log \binom{N}{n} + N\log\sum_{n=0}^N P(n\vert x) + (N-n)\log \sum_{n=0}^N P(nx)
+    &=\sum_{n=0}^N P(n\vert x) \log \binom{N}{n} + \log P(1|x)\sum_{n=0}^N n P(n\vert x) + \log (1-P(n|x)) \sum_{n=0}^N (N-n) P(n|x)\\
 \end{align}
+via normalization and the mean of binomial
+\begin{align}
+    \label{eq:neg cond H}
+    &=\sum_{n=0}^N P(n\vert x) \log \binom{N}{n} + N P(1|x)\log P(1|x) + N - NP(1|x)\log(1-P(1|x))\\
+    &=\sum_{n=0}^N P(n\vert x) \log \binom{N}{n} + N \left[P(1|x)\log P(1|x) + (1-P(1|x))\log (1-P(1|x))\right]
+\end{align}
+then $H(Y|X=x)$ is
+\begin{equation}
+    H(\vb{y}|X=x) - \sum_{n=0}^N P(n\vert x) \log \binom{N}{n}
+\end{equation}
+as the second term of \ref{eq:neg cond H} is the entropy of a vector output $\vb{y}=\left[y_1(x), y_2(x), \dots, y_N(x)\right]$. 
+This states that the conditional entropy of the count is the conditional of $\vb{y}$, subtracting the self-information gained by knowing the specific vector among the $\binom{N}{n}$ possible combinations generating the count $n$.
+
+This matches the intuition that generally the self-information of a specific combination of outputs is higher than that of the count. 
+However, in our case $P(y_n=1|x)$ is dependent only on noise, given that all elements share the same $\theta$, then we will see that MI is equal between the vector and count outputs.
+
+Averaging over $X$, with $(1-P(1|x)) = P(0|x)$
+\begin{align*}
+    &-\int_{-\infty}^\infty dx p_X(x) \left\{\sum_{n=0}^N P(n\vert x) \log \binom{N}{n} + N \left[P(1|x)\log P(1|x) + P(0|x)\log P(0|x)\right]\right\}\\
+    &=-\sum_{n=0}^N \log \binom{N}{n}\int_{-\infty}^\infty dx p_X(x) P(n|x) - N\int_{-\infty}^{\infty} dx p_X(x)\left[P(1|x)\log P(1|x) + P(0|x)\log P(0|x)\right]\\
+    &=-\sum_{n=0}^N p_Y(n) \log \binom{N}{n} - N\int_{-\infty}^{\infty} dx p_X(x)\left[P(1|x)\log P(1|x) + P(0|x)\log P(0|x)\right] \text{.}
+\end{align*}
+
+Then the MI is
+\begin{align}
+    &I(Y;X)\\
+    &=-\sum_{n=0}^N p_Y(n) \log p_Y(n) -\left\{ -\sum_{n=0}^N p_Y(n) \log \binom{N}{n} - N\int_{-\infty}^{\infty} dx p_X(x)\left[P(1|x)\log P(1|x) + P(0|x)\log P(0|x)\right] \right\}\\
+\end{align}
+doing the first sum
+\begin{align*}
+    &-\sum_{n=0}^N p_Y(n) \log p_Y(n) + \sum_{n=0}^N p_Y(n) \log \binom{N}{n}\\
+    &=-\sum_{n=0}^N p_Y(n)\left(\log p_Y(n) - \log \binom{N}{n}\right)\\
+    &=-\sum_{n=0}^N p_Y(n) \left( \log \int_{-\infty}^{\infty} dxp_X(x) \binom{N}{n} P(1|x)^n P(0|x)^{N-n} - \log \binom{N}{n}\right)\\
+    &=-\sum_{n=0}^N p_Y(n) \left( \log \int_{-\infty}^{\infty} dxp_X(x) P(1|x)^n P(0|x)^{N-n} + \log \binom{N}{n} - \log \binom{N}{n} \right)\\
+    &=-\sum_{n=0}^N p_Y(n) \log p'(n)
+\end{align*}
+where
+\begin{equation}
+    p'(n) = \int_{-\infty}^{\infty} dxp_X(x) P(1|x)^n P(0|x)^{N-n}
+\end{equation}
+is the 
